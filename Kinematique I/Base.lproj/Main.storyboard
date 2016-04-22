@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ijY-cg-gJy">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WqW-sn-0os" appends="YES" id="QxA-az-7Jz"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="oJL-E9-TOJ">
+                        <leftBarButtonItems>
+                            <barButtonItem id="Slh-H3-ERL">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gZq-3q-kIn">
+                                    <rect key="frame" x="20" y="7" width="133" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Set Origin"/>
+                                    <connections>
+                                        <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zcv-Tk-Y5h"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem id="g4O-8n-nB8">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IwV-1Y-0XV">
+                                    <rect key="frame" x="161" y="7" width="133" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Add Points"/>
+                                    <connections>
+                                        <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ABe-La-7d6"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="0Y8-5M-ZMh">
+                            <connections>
+                                <action selector="clearAll:" destination="BYZ-38-t0r" id="75j-LK-fAM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPointsButton" destination="IwV-1Y-0XV" id="xlM-KU-bMv"/>
+                        <outlet property="setOriginButton" destination="gZq-3q-kIn" id="OuU-3G-kve"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WqW-sn-0os">
+                    <connections>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="LMw-WW-WYO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="877" y="367"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jc7-xj-8Th">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ijY-cg-gJy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4YI-7f-wIS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="apg-th-df0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yBa-KQ-iuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="851"/>
+        </scene>
+    </scenes>
+</document>
