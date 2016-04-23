@@ -8,9 +8,15 @@
 
 import UIKit
 
-let blackColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
-let grayColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 1.0])
-let PointRadius: CGFloat = 10
+// Constants for drawing axes
+let axesStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
+let axesWidth: CGFloat = 3
+
+// Constants for drawing points
+let pointsFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])
+let pointRadius: CGFloat = 10
+let pointsStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
+let pointsStrokeWidth: CGFloat = 1
 
 class PlaneView: UIView {
     
@@ -35,27 +41,40 @@ class PlaneView: UIView {
         points.removeAll()
     }
     
-    func addCircleAtPoint(context: CGContext, _ point: CGPoint) {
-        let circleRect = CGRectMake(point.x - PointRadius, point.y - PointRadius, 2 * PointRadius, 2 * PointRadius)
+    private func _addAxesForOrigin(context: CGContext, _ origin: CGPoint, _ size: CGSize) {
+        CGContextMoveToPoint(context, origin.x, 0)
+        CGContextAddLineToPoint(context, origin.x, size.height)
+        CGContextMoveToPoint(context, 0, origin.y)
+        CGContextAddLineToPoint(context, size.width, origin.y)
+    }
+    
+    private func _addCircleForPoint(context: CGContext, _ point: CGPoint) {
+        let circleRect = CGRectMake(point.x - pointRadius, point.y - pointRadius, 2 * pointRadius, 2 * pointRadius)
         CGContextAddEllipseInRect(context, circleRect)
     }
 
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
 
-        // Draw the origin as a filled black circle
+        // Add axes if the origin has been set.
         if let origin = origin {
-            CGContextSetFillColorWithColor(context, blackColor)
-            addCircleAtPoint(context, origin)
-            CGContextDrawPath(context, .Fill)
+            CGContextBeginPath(context)
+            CGContextSetFillColorWithColor(context, axesStrokeColor)
+            CGContextSetLineWidth(context, axesWidth)
+            _addAxesForOrigin(context, origin, frame.size)
+            CGContextDrawPath(context, .Stroke)
         }
 
-        // Draw all the other points as filled gray circles
-        CGContextSetFillColorWithColor(context, grayColor)
+        // Add the points as filled gray circles with a thin stroke
+        CGContextBeginPath(context)
+        CGContextSetFillColorWithColor(context, pointsFillColor)
+        CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
+        CGContextSetLineWidth(context, pointsStrokeWidth)
         for point in points {
-            addCircleAtPoint(context, point)
+            _addCircleForPoint(context, point)
         }
-        CGContextDrawPath(context, .Fill)
+        CGContextDrawPath(context, .FillStroke)
+        
     }
 
 }

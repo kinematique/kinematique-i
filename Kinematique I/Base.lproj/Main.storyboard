@@ -3,10 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Kinematique I-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,38 +22,36 @@
                             <outletCollection property="gestureRecognizers" destination="WqW-sn-0os" appends="YES" id="QxA-az-7Jz"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="oJL-E9-TOJ">
-                        <leftBarButtonItems>
-                            <barButtonItem id="Slh-H3-ERL">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gZq-3q-kIn">
-                                    <rect key="frame" x="20" y="7" width="133" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Set Origin"/>
-                                    <connections>
-                                        <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zcv-Tk-Y5h"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem id="g4O-8n-nB8">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IwV-1Y-0XV">
-                                    <rect key="frame" x="161" y="7" width="133" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Add Points"/>
-                                    <connections>
-                                        <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ABe-La-7d6"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="0Y8-5M-ZMh">
+                    <toolbarItems>
+                        <barButtonItem title="Set Origin" style="done" id="xzZ-JF-Ekr">
                             <connections>
-                                <action selector="clearAll:" destination="BYZ-38-t0r" id="75j-LK-fAM"/>
+                                <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="U8s-de-bzl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" title="Add Points" style="plain" id="LtJ-Fv-mVc">
+                            <connections>
+                                <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="5xZ-Hy-RDU"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="MwN-7E-PxD"/>
+                        <barButtonItem enabled="NO" title="Clear" id="uW9-fb-BWD">
+                            <connections>
+                                <action selector="clearAll:" destination="BYZ-38-t0r" id="tdE-Ji-pIp"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Kinematique I" id="oJL-E9-TOJ">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="IMw-9M-2Hk">
+                            <connections>
+                                <segue destination="Jpk-Ij-nzh" kind="show" id="Auc-c2-wMR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addPointsButton" destination="IwV-1Y-0XV" id="xlM-KU-bMv"/>
-                        <outlet property="setOriginButton" destination="gZq-3q-kIn" id="OuU-3G-kve"/>
+                        <outlet property="addPoints" destination="LtJ-Fv-mVc" id="3cq-CW-nCy"/>
+                        <outlet property="clear" destination="uW9-fb-BWD" id="l1s-qh-LMk"/>
+                        <outlet property="next" destination="IMw-9M-2Hk" id="iRD-N7-8Sb"/>
+                        <outlet property="setOrigin" destination="xzZ-JF-Ekr" id="0qB-z2-QPe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -64,25 +61,47 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="877" y="367"/>
+            <point key="canvasLocation" x="559" y="591"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rGa-dq-HaH">
+            <objects>
+                <viewController id="Jpk-Ij-nzh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b4b-QR-Xd3"/>
+                        <viewControllerLayoutGuide type="bottom" id="prS-eA-Gm6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jef-q5-N3C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rxt-PU-cld" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1232" y="591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jc7-xj-8Th">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ijY-cg-gJy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="ijY-cg-gJy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4YI-7f-wIS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Zm0-kS-sab">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="apg-th-df0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBa-KQ-iuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="851"/>
+            <point key="canvasLocation" x="-108" y="591"/>
         </scene>
     </scenes>
 </document>
