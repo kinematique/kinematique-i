@@ -22,16 +22,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleSettingOrigin(sender: UIBarButtonItem?) {
-        settingOrigin = !settingOrigin
-        setOrigin.style = settingOrigin ? .Done : .Plain
-        addPoints.style = settingOrigin ? .Plain : .Done
+        if sender == nil || sender!.tag == 0 {
+            if !settingOrigin {
+                settingOrigin = true
+                setOrigin.style = .Done
+                addPoints.style = .Plain
+            }
+        } else {
+            if settingOrigin {
+                settingOrigin = false
+                setOrigin.style = .Plain
+                addPoints.style = .Done
+            }
+        }
     }
     
     @IBAction func clearAll(sender: UIBarButtonItem) {
         planeView.clearAll()
-        if !settingOrigin {
-            toggleSettingOrigin(nil)
-        }
+        toggleSettingOrigin(nil)
         clear.enabled = false
         addPoints.enabled = false
         next.enabled = false

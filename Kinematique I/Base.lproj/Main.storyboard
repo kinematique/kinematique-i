@@ -28,7 +28,7 @@
                                 <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="U8s-de-bzl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem enabled="NO" title="Add Points" style="plain" id="LtJ-Fv-mVc">
+                        <barButtonItem tag="1" enabled="NO" title="Add Points" style="plain" id="LtJ-Fv-mVc">
                             <connections>
                                 <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="5xZ-Hy-RDU"/>
                             </connections>
