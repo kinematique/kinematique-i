@@ -18,6 +18,14 @@ let pointRadius: CGFloat = 10
 let pointsStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
 let pointsStrokeWidth: CGFloat = 1
 
+// Constants for drawing vectors
+let vectorFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.7, 0.0, 0.0, 0.9])
+let vectorStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
+let headWidth: CGFloat = 10
+let nominalHeadLength: CGFloat = 20
+let tailWidth: CGFloat = 4
+let vectorStrokeWidth: CGFloat = 1
+
 class PlaneView: UIView {
     
     var origin: CGPoint? {
@@ -39,18 +47,45 @@ class PlaneView: UIView {
     func clearAll() {
         origin = nil
         points.removeAll()
+        setNeedsDisplay()
     }
     
-    private func _addAxesForOrigin(context: CGContext, _ origin: CGPoint, _ size: CGSize) {
+    private func _addAxes(context: CGContext, forOrigin origin: CGPoint, frameSize size: CGSize) {
         CGContextMoveToPoint(context, origin.x, 0)
         CGContextAddLineToPoint(context, origin.x, size.height)
         CGContextMoveToPoint(context, 0, origin.y)
         CGContextAddLineToPoint(context, size.width, origin.y)
     }
     
-    private func _addCircleForPoint(context: CGContext, _ point: CGPoint) {
+    private func _addCircle(context: CGContext, atPoint point: CGPoint) {
         let circleRect = CGRectMake(point.x - pointRadius, point.y - pointRadius, 2 * pointRadius, 2 * pointRadius)
         CGContextAddEllipseInRect(context, circleRect)
+    }
+    
+    private func _drawVector(context: CGContext, length: CGFloat) {
+        let headLength: CGFloat = nominalHeadLength < length / 2 ? nominalHeadLength : length / 2
+        let bodyLength: CGFloat = length - headLength
+        CGContextBeginPath(context)
+        CGContextMoveToPoint(context, -tailWidth / 2, tailWidth / 2)
+        CGContextAddLineToPoint(context, bodyLength, tailWidth / 2)
+        CGContextAddLineToPoint(context, bodyLength, headWidth / 2)
+        CGContextAddLineToPoint(context, length, 0)
+        CGContextAddLineToPoint(context, bodyLength, -headWidth / 2)
+        CGContextAddLineToPoint(context, bodyLength, -tailWidth / 2)
+        CGContextAddLineToPoint(context, -tailWidth / 2, -tailWidth / 2)
+        CGContextClosePath(context)
+    }
+    
+    private func _addVector(context: CGContext, fromOrigin origin: CGPoint, toPoint point: CGPoint) {
+        let dy = point.y - origin.y
+        let dx = point.x - origin.x
+        let length: CGFloat = sqrt(dx * dx + dy * dy)
+        let angle: CGFloat = atan2(dy, dx)
+        CGContextSaveGState(context)
+        CGContextTranslateCTM(context, origin.x, origin.y)
+        CGContextRotateCTM(context, angle)
+        _drawVector(context, length: length)
+        CGContextRestoreGState(context)
     }
 
     override func drawRect(rect: CGRect) {
@@ -58,10 +93,10 @@ class PlaneView: UIView {
 
         // Add axes if the origin has been set.
         if let origin = origin {
-            CGContextBeginPath(context)
             CGContextSetFillColorWithColor(context, axesStrokeColor)
             CGContextSetLineWidth(context, axesWidth)
-            _addAxesForOrigin(context, origin, frame.size)
+            CGContextBeginPath(context)
+            _addAxes(context, forOrigin: origin, frameSize: frame.size)
             CGContextDrawPath(context, .Stroke)
         }
 
@@ -71,9 +106,25 @@ class PlaneView: UIView {
         CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
         CGContextSetLineWidth(context, pointsStrokeWidth)
         for point in points {
-            _addCircleForPoint(context, point)
+            CGContextBeginPath(context)
+            _addCircle(context, atPoint: point)
+            CGContextDrawPath(context, .FillStroke)
+
         }
         CGContextDrawPath(context, .FillStroke)
+        
+        // Add the vectors as red arrows
+        CGContextBeginPath(context)
+        CGContextSetFillColorWithColor(context, vectorFillColor)
+        CGContextSetStrokeColorWithColor(context, vectorStrokeColor)
+        CGContextSetLineWidth(context, vectorStrokeWidth)
+        for point in points {
+            CGContextBeginPath(context)
+            _addVector(context, fromOrigin: origin!, toPoint: point)
+            CGContextDrawPath(context, .FillStroke)
+        }
+
+        
         
     }
 
