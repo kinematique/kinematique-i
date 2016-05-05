@@ -10,17 +10,35 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="g8R-wz-lUt"/>
+                        <viewControllerLayoutGuide type="bottom" id="ofV-p2-HAC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="7eR-6G-SoH">
                         <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="WqW-sn-0os" appends="YES" id="QxA-az-7Jz"/>
-                        </connections>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0w-PO-a4k" customClass="TracerView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E5-1g-8C4" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="WqW-sn-0os" appends="YES" id="eb6-kp-Qzf"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="top" secondItem="g8R-wz-lUt" secondAttribute="bottom" id="4Lr-rH-ibO"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="leading" secondItem="7eR-6G-SoH" secondAttribute="leading" id="7y5-lC-eWg"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="top" secondItem="q0w-PO-a4k" secondAttribute="top" id="9OT-80-BNu"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="bottom" secondItem="q0w-PO-a4k" secondAttribute="bottom" id="A3h-xZ-zyq"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="leading" secondItem="q0w-PO-a4k" secondAttribute="leading" id="BY3-d1-8VX"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="trailing" secondItem="7eR-6G-SoH" secondAttribute="trailing" id="Qxc-ri-d0l"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="trailing" secondItem="q0w-PO-a4k" secondAttribute="trailing" id="bNs-aH-CRQ"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="bottom" secondItem="ofV-p2-HAC" secondAttribute="top" id="wXq-qN-MLr"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
@@ -52,7 +70,9 @@
                         <outlet property="addPointsButton" destination="LtJ-Fv-mVc" id="HBf-pb-a5t"/>
                         <outlet property="clearButton" destination="uW9-fb-BWD" id="fGH-iH-rq5"/>
                         <outlet property="nextButton" destination="IMw-9M-2Hk" id="OVL-Vc-Kv1"/>
+                        <outlet property="planeView" destination="9E5-1g-8C4" id="WwX-xS-lS9"/>
                         <outlet property="setOriginButton" destination="xzZ-JF-Ekr" id="R0a-p0-KZw"/>
+                        <outlet property="tracerView" destination="q0w-PO-a4k" id="hyr-1h-V33"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

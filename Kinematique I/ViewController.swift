@@ -10,16 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var tracerView: TracerView!
+    @IBOutlet var planeView: PlaneView!
+    
     @IBOutlet var setOriginButton: UIBarButtonItem!
     @IBOutlet var addPointsButton: UIBarButtonItem!
     @IBOutlet var clearButton: UIBarButtonItem!
     @IBOutlet var nextButton: UIBarButtonItem!
     
     var settingOrigin = true
-    
-    var planeView: PlaneView {
-        return view as! PlaneView
-    }
     
     private func _settingOrigin() {
         if !settingOrigin {

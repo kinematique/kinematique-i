@@ -122,7 +122,7 @@ class PlaneView: UIView {
         let transform = CGAffineTransformMakeScale(scale, scale)
         CGContextConcatCTM(context, transform)
 
-        // Add axes if the origin has been set.
+        // Add axes if the origin has been set
         if let origin = model.origin {
             CGContextSetFillColorWithColor(context, axesStrokeColor)
             CGContextSetLineWidth(context, axesWidth)
@@ -147,7 +147,7 @@ class PlaneView: UIView {
         
         // Label the vectors
         let attributes: [String: AnyObject] = [
-            NSForegroundColorAttributeName : labelTextColor,
+            NSForegroundColorAttributeName: labelTextColor,
             NSFontAttributeName: labelFont
         ]
         for i in 0..<model.points.count {
