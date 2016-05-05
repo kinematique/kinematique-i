@@ -47,12 +47,16 @@ class PlaneView: UIView {
     
     func addPoint(point: CGPoint) {
         model.points.append(point)
+        model.times.append(CFAbsoluteTimeGetCurrent())
+        model.labels.append(String(model.points.count))
         setNeedsDisplay()
     }
     
     func clear() {
         model.origin = nil
         model.points.removeAll()
+        model.times.removeAll()
+        model.labels.removeAll()
         setNeedsDisplay()
     }
     
@@ -146,14 +150,13 @@ class PlaneView: UIView {
             NSForegroundColorAttributeName : labelTextColor,
             NSFontAttributeName: labelFont
         ]
-        var labelCount: Int = 0
-        for point in model.points {
+        for i in 0..<model.points.count {
+            let point = model.points[i]
+            let label = model.labels[i]
             let dy = point.y - model.origin!.y
             let dx = point.x - model.origin!.x
             let halfLength: CGFloat = sqrt(dx * dx + dy * dy) / 2
             let adjustedAngle: CGFloat = atan2(dy, dx) + labelProximity / halfLength
-            labelCount += 1
-            let label = String(labelCount)
             _labelVector(context, fromOrigin: model.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
         

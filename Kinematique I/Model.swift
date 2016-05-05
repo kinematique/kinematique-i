@@ -16,4 +16,8 @@ class Model {
     
     var points: [CGPoint] = []
     
+    var times: [CFTimeInterval] = []
+    
+    var labels: [String] = []
+    
 }
