@@ -25,18 +25,18 @@
                     <toolbarItems>
                         <barButtonItem title="Set Origin" style="done" id="xzZ-JF-Ekr">
                             <connections>
-                                <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="U8s-de-bzl"/>
+                                <action selector="setOrigin:" destination="BYZ-38-t0r" id="soB-Lb-URj"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="1" enabled="NO" title="Add Points" style="plain" id="LtJ-Fv-mVc">
                             <connections>
-                                <action selector="toggleSettingOrigin:" destination="BYZ-38-t0r" id="5xZ-Hy-RDU"/>
+                                <action selector="addPoints:" destination="BYZ-38-t0r" id="g4p-U0-mCr"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="MwN-7E-PxD"/>
                         <barButtonItem enabled="NO" title="Clear" id="uW9-fb-BWD">
                             <connections>
-                                <action selector="clearAll:" destination="BYZ-38-t0r" id="tdE-Ji-pIp"/>
+                                <action selector="clear:" destination="BYZ-38-t0r" id="keK-Bp-w8C"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -48,10 +48,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addPoints" destination="LtJ-Fv-mVc" id="3cq-CW-nCy"/>
-                        <outlet property="clear" destination="uW9-fb-BWD" id="l1s-qh-LMk"/>
-                        <outlet property="next" destination="IMw-9M-2Hk" id="iRD-N7-8Sb"/>
-                        <outlet property="setOrigin" destination="xzZ-JF-Ekr" id="0qB-z2-QPe"/>
+                        <outlet property="addPointsButton" destination="LtJ-Fv-mVc" id="HBf-pb-a5t"/>
+                        <outlet property="clearButton" destination="uW9-fb-BWD" id="fGH-iH-rq5"/>
+                        <outlet property="nextButton" destination="IMw-9M-2Hk" id="OVL-Vc-Kv1"/>
+                        <outlet property="setOriginButton" destination="xzZ-JF-Ekr" id="R0a-p0-KZw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

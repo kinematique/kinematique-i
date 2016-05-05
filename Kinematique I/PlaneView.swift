@@ -28,25 +28,21 @@ let vectorStrokeWidth: CGFloat = 1
 
 class PlaneView: UIView {
     
-    var origin: CGPoint? {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
+    let model = Model.sharedInstance
     
-    var points = [CGPoint]() {
-        didSet {
-            setNeedsDisplay()
-        }
+    func setOrigin(origin: CGPoint) {
+        model.origin = origin
+        setNeedsDisplay()
     }
     
     func addPoint(point: CGPoint) {
-        points.append(point)
+        model.points.append(point)
+        setNeedsDisplay()
     }
     
-    func clearAll() {
-        origin = nil
-        points.removeAll()
+    func clear() {
+        model.origin = nil
+        model.points.removeAll()
         setNeedsDisplay()
     }
     
@@ -92,7 +88,7 @@ class PlaneView: UIView {
         let context = UIGraphicsGetCurrentContext()!
 
         // Add axes if the origin has been set.
-        if let origin = origin {
+        if let origin = model.origin {
             CGContextSetFillColorWithColor(context, axesStrokeColor)
             CGContextSetLineWidth(context, axesWidth)
             CGContextBeginPath(context)
@@ -105,7 +101,7 @@ class PlaneView: UIView {
         CGContextSetFillColorWithColor(context, pointsFillColor)
         CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
         CGContextSetLineWidth(context, pointsStrokeWidth)
-        for point in points {
+        for point in model.points {
             CGContextBeginPath(context)
             _addCircle(context, atPoint: point)
             CGContextDrawPath(context, .FillStroke)
@@ -118,13 +114,11 @@ class PlaneView: UIView {
         CGContextSetFillColorWithColor(context, vectorFillColor)
         CGContextSetStrokeColorWithColor(context, vectorStrokeColor)
         CGContextSetLineWidth(context, vectorStrokeWidth)
-        for point in points {
+        for point in model.points {
             CGContextBeginPath(context)
-            _addVector(context, fromOrigin: origin!, toPoint: point)
+            _addVector(context, fromOrigin: model.origin!, toPoint: point)
             CGContextDrawPath(context, .FillStroke)
         }
-
-        
         
     }
 

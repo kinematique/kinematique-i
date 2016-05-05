@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D32202EB1CCAB9F80010B3A3 /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */; };
+		D368FA3D1CDAE7720078A5A0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D368FA3C1CDAE7720078A5A0 /* Model.swift */; };
 		D396A8521CCAB02400DB48A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D396A8511CCAB02400DB48A2 /* AppDelegate.swift */; };
 		D396A8541CCAB02400DB48A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D396A8531CCAB02400DB48A2 /* ViewController.swift */; };
 		D396A8571CCAB02400DB48A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D396A8551CCAB02400DB48A2 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneView.swift; sourceTree = "<group>"; };
+		D368FA3C1CDAE7720078A5A0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D396A84E1CCAB02400DB48A2 /* Kinematique I.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kinematique I.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D396A8511CCAB02400DB48A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D396A8531CCAB02400DB48A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				D396A8511CCAB02400DB48A2 /* AppDelegate.swift */,
 				D396A8531CCAB02400DB48A2 /* ViewController.swift */,
 				D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */,
+				D368FA3C1CDAE7720078A5A0 /* Model.swift */,
 				D396A8551CCAB02400DB48A2 /* Main.storyboard */,
 				D396A8581CCAB02400DB48A2 /* Assets.xcassets */,
 				D396A85A1CCAB02400DB48A2 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				D396A8541CCAB02400DB48A2 /* ViewController.swift in Sources */,
 				D32202EB1CCAB9F80010B3A3 /* PlaneView.swift in Sources */,
 				D396A8521CCAB02400DB48A2 /* AppDelegate.swift in Sources */,
+				D368FA3D1CDAE7720078A5A0 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

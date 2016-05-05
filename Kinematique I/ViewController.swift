@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var setOrigin: UIBarButtonItem!
-    @IBOutlet var addPoints: UIBarButtonItem!
-    @IBOutlet var clear: UIBarButtonItem!
-    @IBOutlet var next: UIBarButtonItem!
+    @IBOutlet var setOriginButton: UIBarButtonItem!
+    @IBOutlet var addPointsButton: UIBarButtonItem!
+    @IBOutlet var clearButton: UIBarButtonItem!
+    @IBOutlet var nextButton: UIBarButtonItem!
     
     var settingOrigin = true
     
@@ -21,42 +21,50 @@ class ViewController: UIViewController {
         return view as! PlaneView
     }
     
-    @IBAction func toggleSettingOrigin(sender: UIBarButtonItem?) {
-        if sender == nil || sender!.tag == 0 {
-            if !settingOrigin {
-                settingOrigin = true
-                setOrigin.style = .Done
-                addPoints.style = .Plain
-            }
-        } else {
-            if settingOrigin {
-                settingOrigin = false
-                setOrigin.style = .Plain
-                addPoints.style = .Done
-            }
+    private func _settingOrigin() {
+        if !settingOrigin {
+            settingOrigin = true
+            setOriginButton.style = .Done
+            addPointsButton.style = .Plain
         }
     }
     
-    @IBAction func clearAll(sender: UIBarButtonItem) {
-        planeView.clearAll()
-        toggleSettingOrigin(nil)
-        clear.enabled = false
-        addPoints.enabled = false
-        next.enabled = false
+    private func _addingPoints() {
+        if settingOrigin {
+            settingOrigin = false
+            setOriginButton.style = .Plain
+            addPointsButton.style = .Done
+        }
+    }
+    
+    @IBAction func setOrigin(sender: UIBarButtonItem) {
+        _settingOrigin()
+    }
+    
+    @IBAction func addPoints(sender: UIBarButtonItem) {
+        _addingPoints()
+    }
+    
+    @IBAction func clear(sender: UIBarButtonItem) {
+        planeView.clear()
+        _settingOrigin()
+        clearButton.enabled = false
+        addPointsButton.enabled = false
+        nextButton.enabled = false
     }
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
         let tapPoint: CGPoint = sender.locationOfTouch(0, inView: planeView)
         if settingOrigin {
-            planeView.origin = tapPoint
+            planeView.setOrigin(tapPoint)
             // once the origin has been set, the user can clear or add points
-            clear.enabled = true
-            addPoints.enabled = true
+            clearButton.enabled = true
+            addPointsButton.enabled = true
         } else {
             planeView.addPoint(tapPoint)
-            // once the user has added points, they can hit next
-            if !next.enabled {
-                next.enabled = true
+            // once the user has added one or more points, they can hit next
+            if !nextButton.enabled {
+                nextButton.enabled = true
             }
         }
     }
