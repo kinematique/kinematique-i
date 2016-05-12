@@ -53,6 +53,16 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="MwN-7E-PxD"/>
+                        <barButtonItem title="Circular" id="puu-ZT-QZ4">
+                            <connections>
+                                <action selector="circular:" destination="BYZ-38-t0r" id="NTd-y8-iBq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Parabolic" id="DCj-zJ-cIj">
+                            <connections>
+                                <action selector="parabolic:" destination="BYZ-38-t0r" id="cOM-am-q4c"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem enabled="NO" title="Clear" id="uW9-fb-BWD">
                             <connections>
                                 <action selector="clear:" destination="BYZ-38-t0r" id="keK-Bp-w8C"/>
@@ -68,8 +78,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addPointsButton" destination="LtJ-Fv-mVc" id="HBf-pb-a5t"/>
+                        <outlet property="circularButton" destination="puu-ZT-QZ4" id="U8H-GA-TsE"/>
                         <outlet property="clearButton" destination="uW9-fb-BWD" id="fGH-iH-rq5"/>
                         <outlet property="nextButton" destination="IMw-9M-2Hk" id="OVL-Vc-Kv1"/>
+                        <outlet property="parabolicButton" destination="DCj-zJ-cIj" id="4dF-LX-VhH"/>
                         <outlet property="planeView" destination="9E5-1g-8C4" id="WwX-xS-lS9"/>
                         <outlet property="setOriginButton" destination="xzZ-JF-Ekr" id="R0a-p0-KZw"/>
                         <outlet property="tracerView" destination="q0w-PO-a4k" id="hyr-1h-V33"/>

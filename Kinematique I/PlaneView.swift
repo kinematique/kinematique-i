@@ -57,8 +57,10 @@ class PlaneView: UIView {
         setNeedsDisplay()
     }
     
-    func clear() {
-        dataModel.origin = nil
+    func clear(clearOrigin: Bool) {
+        if clearOrigin {
+            dataModel.origin = nil
+        }
         dataModel.points.removeAll()
         dataModel.initialTime = nil
         dataModel.times.removeAll()

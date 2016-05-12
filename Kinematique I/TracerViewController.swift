@@ -17,7 +17,9 @@ class TracerViewController: UIViewController {
     @IBOutlet var addPointsButton: UIBarButtonItem!
     @IBOutlet var clearButton: UIBarButtonItem!
     @IBOutlet var nextButton: UIBarButtonItem!
-    
+    @IBOutlet var circularButton: UIBarButtonItem!
+    @IBOutlet var parabolicButton: UIBarButtonItem!
+
     var settingOrigin = true
     
     var displayLink: CADisplayLink! = nil
@@ -40,6 +42,24 @@ class TracerViewController: UIViewController {
         }
     }
     
+    @IBAction func circular(sender: UIBarButtonItem) {
+        VelocitySelections.sharedInstance.showingParabolic = false
+        circularButton.style = .Done
+        parabolicButton.style = .Plain
+        viewAppearingTime = CFAbsoluteTimeGetCurrent()
+        tracerView.timeInterval = 0
+        _clear(false)
+    }
+    
+    @IBAction func parabolic(sender: UIBarButtonItem) {
+        VelocitySelections.sharedInstance.showingParabolic = true
+        circularButton.style = .Plain
+        parabolicButton.style = .Done
+        viewAppearingTime = CFAbsoluteTimeGetCurrent()
+        tracerView.timeInterval = 0
+        _clear(false)
+    }
+    
     @IBAction func setOrigin(sender: UIBarButtonItem) {
         _settingOrigin()
     }
@@ -48,12 +68,18 @@ class TracerViewController: UIViewController {
         _addingPoints()
     }
     
-    @IBAction func clear(sender: UIBarButtonItem) {
-        planeView.clear()
-        _settingOrigin()
-        clearButton.enabled = false
-        addPointsButton.enabled = false
+    func _clear(clearOrigin: Bool) {
+        if clearOrigin {
+            _settingOrigin()
+            clearButton.enabled = false
+            addPointsButton.enabled = false
+        }
+        planeView.clear(clearOrigin)
         nextButton.enabled = false
+    }
+    
+    @IBAction func clear(sender: UIBarButtonItem) {
+        _clear(true)
     }
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
@@ -85,6 +111,8 @@ class TracerViewController: UIViewController {
         tracerView.timeInterval = 0
         tracerView.setNeedsDisplay()
         displayLink.paused = false
+        circularButton.style = VelocitySelections.sharedInstance.showingParabolic ? .Plain : .Done
+        parabolicButton.style = VelocitySelections.sharedInstance.showingParabolic ? .Done : .Plain
     }
     
     override func viewWillDisappear(animated: Bool) {

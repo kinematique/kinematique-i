@@ -10,8 +10,17 @@ import UIKit
 
 import CoreGraphics
 
+// Circular motion parameters
 let radius: CGFloat = 250.0
 let period: CFTimeInterval = 15
+
+// Parabolic motion parameters
+let transitTime: CFTimeInterval = 10
+let transitWidth: CGFloat = 600
+let initialVerticalVelocity: CGFloat = 200
+let verticalDeceleration: CGFloat = 2 * initialVerticalVelocity / CGFloat(transitTime)
+let doOverTime: CFTimeInterval = 12
+let initialAltitude: CGFloat = 40
 
 // Constants for drawing tracer points
 let tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])
@@ -32,6 +41,21 @@ class TracerView: UIView {
         CGContextDrawPath(context, .FillStroke)
     }
     
+    func circularMotion(timeInterval: CFTimeInterval) -> CGPoint? {
+        let angle = CGFloat(2) * CGFloat(M_PI) * CGFloat(timeInterval) / CGFloat(period)
+        let x = radius * cos(angle) + frame.size.width / 2
+        let y = radius * sin(angle) + frame.size.height / 2
+        return CGPointMake(x, y)
+    }
+    
+    func parabolicMotion(timeInterval: CFTimeInterval) -> CGPoint? {
+        let remainder = timeInterval % doOverTime
+        if remainder < 0 || remainder > transitTime { return nil }
+        let x: CGFloat = transitWidth * (CGFloat(remainder) / CGFloat(transitTime) - 1 / 2) + frame.size.width / 2
+        let y: CGFloat = frame.size.height - initialVerticalVelocity * CGFloat(remainder) + verticalDeceleration * CGFloat(remainder) * CGFloat(remainder) / 2 - initialAltitude
+        return CGPointMake(x, y)
+    }
+    
     override func drawRect(rect: CGRect) {
         
         // The time interval is supposed to be set by the display link in the view controller
@@ -47,13 +71,12 @@ class TracerView: UIView {
         for i in 0..<shadowQuantity {
             // Add the points as filled gray circles with a thin stroke
             let shadowFraction = CFTimeInterval(i) / CFTimeInterval(shadowQuantity)
-            let shadowTime = shadowFraction * shadowDuration
-            let angle = CGFloat(2) * CGFloat(M_PI) * CGFloat(timeInterval - shadowTime) / CGFloat(period)
-            let x = radius * cos(angle) + frame.size.width / 2
-            let y = radius * sin(angle) + frame.size.height / 2
-            let point = CGPointMake(x, y)
+            let shadowTimeInterval = shadowFraction * shadowDuration
+            let shadowTime = timeInterval - shadowTimeInterval
+            let point = VelocitySelections.sharedInstance.showingParabolic ? parabolicMotion(shadowTime) : circularMotion(shadowTime)
             CGContextSetAlpha(context, CGFloat(1 - shadowFraction))
-            _addCircle(context, atPoint: point)
+            guard let knownPoint = point else { continue }
+            _addCircle(context, atPoint: knownPoint)
         }
         
     }

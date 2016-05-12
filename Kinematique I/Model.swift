@@ -36,4 +36,6 @@ class VelocitySelections {
     
     var showingVelocities: Bool = false
     
+    var showingParabolic: Bool = false
+    
 }
