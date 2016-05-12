@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TracerViewController.swift
 //  Kinematique I
 //
 //  Created by Brian Hill on 4/22/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TracerViewController: UIViewController {
     
     @IBOutlet var tracerView: TracerView!
     @IBOutlet var planeView: PlaneView!

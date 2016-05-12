@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Kinematique I-->
+        <!--Tracer View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Tracer View Controller" customClass="TracerViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g8R-wz-lUt"/>
                         <viewControllerLayoutGuide type="bottom" id="ofV-p2-HAC"/>
@@ -84,19 +84,56 @@
             </objects>
             <point key="canvasLocation" x="559" y="591"/>
         </scene>
-        <!--View Controller-->
+        <!--Velocities View Controller-->
         <scene sceneID="rGa-dq-HaH">
             <objects>
-                <viewController id="Jpk-Ij-nzh" sceneMemberID="viewController">
+                <viewController id="Jpk-Ij-nzh" customClass="VelocitiesViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b4b-QR-Xd3"/>
                         <viewControllerLayoutGuide type="bottom" id="prS-eA-Gm6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jef-q5-N3C">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMv-Oe-yWI" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZEv-3z-rfq" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="3y6-k9-GNR"/>
+                            <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="4lP-xj-LbV"/>
+                            <constraint firstItem="ZEv-3z-rfq" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="82a-qc-dFG"/>
+                            <constraint firstItem="ZEv-3z-rfq" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="C1P-FM-7hj"/>
+                            <constraint firstItem="ZEv-3z-rfq" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="bct-Mx-nuv"/>
+                            <constraint firstItem="QMv-Oe-yWI" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="get-k8-DXh"/>
+                            <constraint firstItem="QMv-Oe-yWI" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="goA-vW-ICb"/>
+                            <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="hF0-UD-3Bg"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <toolbarItems>
+                        <barButtonItem title="Earlier" id="P1T-1w-ntK">
+                            <connections>
+                                <action selector="earlier:" destination="Jpk-Ij-nzh" id="qFN-WO-42y"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Later" id="t4Z-lc-aUz">
+                            <connections>
+                                <action selector="later:" destination="Jpk-Ij-nzh" id="kxy-Nq-dg4"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <connections>
+                        <outlet property="earlierButton" destination="P1T-1w-ntK" id="3oQ-iO-9WY"/>
+                        <outlet property="laterButton" destination="t4Z-lc-aUz" id="saA-XM-cMx"/>
+                        <outlet property="velocitiesView" destination="QMv-Oe-yWI" id="D4K-vN-dqZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxt-PU-cld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

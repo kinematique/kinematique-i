@@ -38,34 +38,36 @@ class PlaneView: UIView {
     
     var scale: CGFloat = 1.0
     
-    let model = Model.sharedInstance
+    let dataModel = DataModel.sharedInstance
+    let velocitySelections = VelocitySelections.sharedInstance
     
     func setOrigin(origin: CGPoint) {
-        model.origin = origin
+        dataModel.origin = origin
         setNeedsDisplay()
     }
     
     func addPoint(point: CGPoint) {
         let now = CFAbsoluteTimeGetCurrent()
-        if model.points.count == 0 {
-            model.initialTime = now
+        if dataModel.points.count == 0 {
+            dataModel.initialTime = now
         }
-        model.points.append(point)
-        model.times.append(now - model.initialTime!)
-        model.labels.append(String(model.points.count))
+        dataModel.points.append(point)
+        dataModel.times.append(now - dataModel.initialTime!)
+        dataModel.labels.append(String(dataModel.points.count))
         setNeedsDisplay()
     }
     
     func clear() {
-        model.origin = nil
-        model.points.removeAll()
-        model.initialTime = nil
-        model.times.removeAll()
-        model.labels.removeAll()
+        dataModel.origin = nil
+        dataModel.points.removeAll()
+        dataModel.initialTime = nil
+        dataModel.times.removeAll()
+        dataModel.labels.removeAll()
+        velocitySelections.selections.removeAll()
         setNeedsDisplay()
     }
     
-    private func _addAxes(context: CGContext, forOrigin origin: CGPoint, frameSize size: CGSize) {
+    func addAxes(context: CGContext, forOrigin origin: CGPoint, frameSize size: CGSize) {
         CGContextBeginPath(context)
         CGContextMoveToPoint(context, origin.x, 0)
         CGContextAddLineToPoint(context, origin.x, size.height / scale)
@@ -85,18 +87,18 @@ class PlaneView: UIView {
         let headLength: CGFloat = nominalHeadLength < length / 2 ? nominalHeadLength : length / 2
         let bodyLength: CGFloat = length - headLength
         CGContextBeginPath(context)
-        CGContextMoveToPoint(context, -tailWidth / 2, tailWidth / 2)
+        CGContextMoveToPoint(context, 0, tailWidth / 2)
         CGContextAddLineToPoint(context, bodyLength, tailWidth / 2)
         CGContextAddLineToPoint(context, bodyLength, headWidth / 2)
         CGContextAddLineToPoint(context, length, 0)
         CGContextAddLineToPoint(context, bodyLength, -headWidth / 2)
         CGContextAddLineToPoint(context, bodyLength, -tailWidth / 2)
-        CGContextAddLineToPoint(context, -tailWidth / 2, -tailWidth / 2)
+        CGContextAddLineToPoint(context, 0, -tailWidth / 2)
         CGContextClosePath(context)
         CGContextDrawPath(context, .FillStroke)
     }
 
-    private func _addVector(context: CGContext, fromOrigin origin: CGPoint, toPoint point: CGPoint) {
+    func addVector(context: CGContext, fromOrigin origin: CGPoint, toPoint point: CGPoint) {
         let dy = point.y - origin.y
         let dx = point.x - origin.x
         let length: CGFloat = sqrt(dx * dx + dy * dy)
@@ -108,7 +110,7 @@ class PlaneView: UIView {
         CGContextRestoreGState(context)
     }
     
-    private func _labelVector(context: CGContext, fromOrigin origin: CGPoint, adjustedAngle: CGFloat, halfLength: CGFloat, attributes: [String: AnyObject], label: String) {
+    func labelVector(context: CGContext, fromOrigin origin: CGPoint, adjustedAngle: CGFloat, halfLength: CGFloat, attributes: [String: AnyObject], label: String) {
         let attributedString = NSAttributedString(string: label, attributes: attributes)
         let line = CTLineCreateWithAttributedString(attributedString)
         CGContextSaveGState(context)
@@ -128,14 +130,14 @@ class PlaneView: UIView {
         CGContextConcatCTM(context, transform)
 
         // Add axes if the origin has been set
-        if let origin = model.origin {
+        if let origin = dataModel.origin {
             CGContextSetFillColorWithColor(context, axesStrokeColor)
             CGContextSetLineWidth(context, axesWidth)
-            _addAxes(context, forOrigin: origin, frameSize: frame.size)
+            addAxes(context, forOrigin: origin, frameSize: frame.size)
         }
 
         // Add the points as filled gray circles with a thin stroke
-        for point in model.points {
+        for point in dataModel.points {
             CGContextSetFillColorWithColor(context, pointsFillColor)
             CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
             CGContextSetLineWidth(context, pointsStrokeWidth)
@@ -146,8 +148,8 @@ class PlaneView: UIView {
         CGContextSetFillColorWithColor(context, vectorFillColor)
         CGContextSetStrokeColorWithColor(context, vectorStrokeColor)
         CGContextSetLineWidth(context, vectorStrokeWidth)
-        for point in model.points {
-            _addVector(context, fromOrigin: model.origin!, toPoint: point)
+        for point in dataModel.points {
+            addVector(context, fromOrigin: dataModel.origin!, toPoint: point)
         }
         
         // Label the vectors
@@ -155,14 +157,14 @@ class PlaneView: UIView {
             NSForegroundColorAttributeName: labelTextColor,
             NSFontAttributeName: labelFont
         ]
-        for i in 0..<model.points.count {
-            let point = model.points[i]
-            let label = model.labels[i]
-            let dy = point.y - model.origin!.y
-            let dx = point.x - model.origin!.x
+        for idx in 0..<dataModel.points.count {
+            let point = dataModel.points[idx]
+            let label = dataModel.labels[idx]
+            let dy = point.y - dataModel.origin!.y
+            let dx = point.x - dataModel.origin!.x
             let halfLength: CGFloat = sqrt(dx * dx + dy * dy) / 2
             let adjustedAngle: CGFloat = atan2(dy, dx) + labelProximity / halfLength
-            _labelVector(context, fromOrigin: model.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
+            labelVector(context, fromOrigin: dataModel.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
         
         CGContextRestoreGState(context)

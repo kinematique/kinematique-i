@@ -8,9 +8,10 @@
 
 import CoreGraphics
 
-class Model {
+
+class DataModel {
     
-    static let sharedInstance = Model()
+    static let sharedInstance = DataModel()
     
     var origin: CGPoint?
 
@@ -21,5 +22,16 @@ class Model {
     var times: [CFTimeInterval] = []
     
     var labels: [String] = []
+    
+}
+
+
+typealias Difference = (from: Int, to: Int)
+
+class VelocitySelections {
+    
+    static let sharedInstance = VelocitySelections()
+    
+    var selections: [Difference] = []
     
 }
