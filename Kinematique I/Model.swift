@@ -34,4 +34,6 @@ class VelocitySelections {
     
     var selections: [Difference] = []
     
+    var showingVelocities: Bool = false
+    
 }

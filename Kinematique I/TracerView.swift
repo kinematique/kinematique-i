@@ -10,8 +10,8 @@ import UIKit
 
 import CoreGraphics
 
-let radius: CGFloat = 275.0
-let period: CFTimeInterval = 10
+let radius: CGFloat = 250.0
+let period: CFTimeInterval = 15
 
 // Constants for drawing tracer points
 let tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])

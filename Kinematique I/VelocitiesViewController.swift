@@ -14,6 +14,8 @@ class VelocitiesViewController: UIViewController {
     
     @IBOutlet var earlierButton: UIBarButtonItem!
     @IBOutlet var laterButton: UIBarButtonItem!
+    @IBOutlet var differencesButton: UIBarButtonItem!
+    @IBOutlet var veloctiesButton: UIBarButtonItem!
     
     func canGoEarlier() -> Bool {
         let velocitySelections = VelocitySelections.sharedInstance
@@ -59,6 +61,20 @@ class VelocitiesViewController: UIViewController {
         _later()
     }
     
+    @IBAction func differences(sender: UIBarButtonItem) {
+        VelocitySelections.sharedInstance.showingVelocities = false
+        differencesButton.style = .Done
+        veloctiesButton.style = .Plain
+        velocitiesView.setNeedsDisplay()
+    }
+    
+    @IBAction func velocities(sender: UIBarButtonItem) {
+        VelocitySelections.sharedInstance.showingVelocities = true
+        differencesButton.style = .Plain
+        veloctiesButton.style = .Done
+        velocitiesView.setNeedsDisplay()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if velocitiesView.velocitySelections.selections.count == 0 {
@@ -66,6 +82,9 @@ class VelocitiesViewController: UIViewController {
         }
         earlierButton.enabled = canGoEarlier()
         laterButton.enabled = canGoLater()
+        let showingVelocities = VelocitySelections.sharedInstance.showingVelocities
+        differencesButton.style = showingVelocities ? .Plain : .Done
+        veloctiesButton.style = showingVelocities ? .Done : .Plain
     }
 
     override func viewDidLoad() {

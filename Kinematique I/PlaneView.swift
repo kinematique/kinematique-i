@@ -64,6 +64,7 @@ class PlaneView: UIView {
         dataModel.times.removeAll()
         dataModel.labels.removeAll()
         velocitySelections.selections.removeAll()
+        velocitySelections.showingVelocities = false
         setNeedsDisplay()
     }
     

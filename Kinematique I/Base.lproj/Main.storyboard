@@ -128,11 +128,24 @@
                                 <action selector="later:" destination="Jpk-Ij-nzh" id="kxy-Nq-dg4"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="6mr-No-oC0"/>
+                        <barButtonItem title="Differences" id="dmq-99-tCu">
+                            <connections>
+                                <action selector="differences:" destination="Jpk-Ij-nzh" id="ZdN-Am-2sC"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Velocities" id="ThM-Z8-4by">
+                            <connections>
+                                <action selector="velocities:" destination="Jpk-Ij-nzh" id="PWu-fI-ONy"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <connections>
+                        <outlet property="differencesButton" destination="dmq-99-tCu" id="r3H-Os-Fkf"/>
                         <outlet property="earlierButton" destination="P1T-1w-ntK" id="3oQ-iO-9WY"/>
                         <outlet property="laterButton" destination="t4Z-lc-aUz" id="saA-XM-cMx"/>
                         <outlet property="velocitiesView" destination="QMv-Oe-yWI" id="D4K-vN-dqZ"/>
+                        <outlet property="veloctiesButton" destination="ThM-Z8-4by" id="Uip-Ds-fvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxt-PU-cld" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let velocityScale: CGFloat = 1.5
+
 // Constants for drawing velocities
 let differenceFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.2, 0.3, 0.7, 0.9])
 let differenceStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
@@ -75,8 +77,13 @@ class VelocitiesView: PlaneView {
         CGContextSetLineWidth(context, vectorStrokeWidth)
         for difference in velocitySelections.selections {
             let fromPoint = dataModel.points[difference.from]
+            let fromTime = dataModel.times[difference.from]
             let toPoint = dataModel.points[difference.to]
-            addVector(context, fromOrigin: fromPoint, toPoint: toPoint)
+            let toTime = dataModel.times[difference.to]
+            let deltaScale: CGFloat = velocitySelections.showingVelocities ? velocityScale / CGFloat(toTime - fromTime) : 1
+            let delta = CGPointMake(deltaScale * (toPoint.x - fromPoint.x), deltaScale * (toPoint.y - fromPoint.y))
+            let scaledToPoint = CGPointMake(fromPoint.x + delta.x, fromPoint.y + delta.y)
+            addVector(context, fromOrigin: fromPoint, toPoint: scaledToPoint)
         }
         
         CGContextRestoreGState(context)
