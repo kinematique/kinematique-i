@@ -20,6 +20,10 @@ class ViewController: UIViewController {
     
     var settingOrigin = true
     
+    var displayLink: CADisplayLink! = nil
+    
+    var viewAppearingTime: CFAbsoluteTime = 0.0
+    
     private func _settingOrigin() {
         if !settingOrigin {
             settingOrigin = true
@@ -69,7 +73,35 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()	
+        super.viewDidLoad()
+        displayLink = CADisplayLink(target:self, selector:#selector(prepareForVSync(_:)))
+        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode:NSRunLoopCommonModes)
+        displayLink.paused = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        viewAppearingTime = CFAbsoluteTimeGetCurrent()
+        tracerView.timeInterval = 0
+        tracerView.setNeedsDisplay()
+        displayLink.paused = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        displayLink.paused = true
+        tracerView.timeInterval = nil
+        super.viewWillDisappear(animated)
+    }
+    
+    func prepareForVSync(displayLink: CADisplayLink) {
+        let timeInterval = CFAbsoluteTimeGetCurrent() + displayLink.duration - viewAppearingTime
+        tracerView.timeInterval = timeInterval
+        tracerView.setNeedsDisplay()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }

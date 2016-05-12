@@ -30,14 +30,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="top" secondItem="g8R-wz-lUt" secondAttribute="bottom" id="4Lr-rH-ibO"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="leading" secondItem="7eR-6G-SoH" secondAttribute="leading" id="7y5-lC-eWg"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="top" secondItem="q0w-PO-a4k" secondAttribute="top" id="9OT-80-BNu"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="bottom" secondItem="q0w-PO-a4k" secondAttribute="bottom" id="A3h-xZ-zyq"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="leading" secondItem="q0w-PO-a4k" secondAttribute="leading" id="BY3-d1-8VX"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="trailing" secondItem="7eR-6G-SoH" secondAttribute="trailing" id="Qxc-ri-d0l"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="trailing" secondItem="q0w-PO-a4k" secondAttribute="trailing" id="bNs-aH-CRQ"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="bottom" secondItem="ofV-p2-HAC" secondAttribute="top" id="wXq-qN-MLr"/>
+                            <constraint firstItem="q0w-PO-a4k" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="N8w-T8-bfx"/>
+                            <constraint firstItem="q0w-PO-a4k" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="YuO-cJ-04f"/>
+                            <constraint firstItem="q0w-PO-a4k" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="avG-ZU-QoB"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="gs1-uu-1iC"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="ia7-yk-5cA"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="lju-HO-tz7"/>
+                            <constraint firstItem="q0w-PO-a4k" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="pXF-uB-6qU"/>
+                            <constraint firstItem="9E5-1g-8C4" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="uAV-E3-gkb"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

@@ -13,6 +13,8 @@ class Model {
     static let sharedInstance = Model()
     
     var origin: CGPoint?
+
+    var initialTime: CFAbsoluteTime? = nil // this is set to the time that the first point is added    
     
     var points: [CGPoint] = []
     

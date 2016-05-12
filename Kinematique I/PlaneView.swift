@@ -46,8 +46,12 @@ class PlaneView: UIView {
     }
     
     func addPoint(point: CGPoint) {
+        let now = CFAbsoluteTimeGetCurrent()
+        if model.points.count == 0 {
+            model.initialTime = now
+        }
         model.points.append(point)
-        model.times.append(CFAbsoluteTimeGetCurrent())
+        model.times.append(now - model.initialTime!)
         model.labels.append(String(model.points.count))
         setNeedsDisplay()
     }
@@ -55,6 +59,7 @@ class PlaneView: UIView {
     func clear() {
         model.origin = nil
         model.points.removeAll()
+        model.initialTime = nil
         model.times.removeAll()
         model.labels.removeAll()
         setNeedsDisplay()
