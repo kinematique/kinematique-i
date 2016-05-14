@@ -38,8 +38,6 @@ class PlaneView: UIView {
     
     static var fullHeight: CGFloat = 1000 // a placeholder
     
-    var scale: CGFloat = 1.0
-    
     let dataModel = DataModel.sharedInstance
     
     func setOrigin(origin: CGPoint) {
@@ -74,9 +72,9 @@ class PlaneView: UIView {
     func addAxes(context: CGContext, forOrigin origin: CGPoint, frameSize size: CGSize) {
         CGContextBeginPath(context)
         CGContextMoveToPoint(context, origin.x, 0)
-        CGContextAddLineToPoint(context, origin.x, size.height / scale)
+        CGContextAddLineToPoint(context, origin.x, size.height)
         CGContextMoveToPoint(context, 0, origin.y)
-        CGContextAddLineToPoint(context, size.width / scale, origin.y)
+        CGContextAddLineToPoint(context, size.width, origin.y)
         CGContextDrawPath(context, .Stroke)
     }
     
@@ -129,10 +127,6 @@ class PlaneView: UIView {
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         
-        CGContextSaveGState(context)
-        let transform = CGAffineTransformMakeScale(scale, scale)
-        CGContextConcatCTM(context, transform)
-
         // Add axes if the origin has been set
         if let origin = dataModel.origin {
             CGContextSetFillColorWithColor(context, axesStrokeColor)
@@ -170,8 +164,6 @@ class PlaneView: UIView {
             let adjustedAngle: CGFloat = atan2(dy, dx) + labelProximity / halfLength
             labelVector(context, fromOrigin: dataModel.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
-        
-        CGContextRestoreGState(context)
         
     }
 

@@ -22,10 +22,6 @@ class VelocitiesView: PlaneView {
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         
-        CGContextSaveGState(context)
-        let transform = CGAffineTransformMakeScale(scale, scale)
-        CGContextConcatCTM(context, transform)
-        
         // Add axes if the origin has been set
         if let origin = dataModel.origin {
             CGContextSetFillColorWithColor(context, axesStrokeColor)
@@ -79,8 +75,6 @@ class VelocitiesView: PlaneView {
                 addVector(context, fromOrigin: fromPoint, toPoint: toPoint)
             }
         }
-        
-        CGContextRestoreGState(context)
         
     }
 
