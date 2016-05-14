@@ -10,6 +10,8 @@ import UIKit
 
 class VelocitiesViewController: UIViewController {
     
+    let interfaceState = InterfaceState.sharedInstance
+    
     @IBOutlet var velocitiesView: VelocitiesView!
     
     @IBOutlet var earlierButton: UIBarButtonItem!
@@ -18,24 +20,20 @@ class VelocitiesViewController: UIViewController {
     @IBOutlet var veloctiesButton: UIBarButtonItem!
     
     func canGoEarlier() -> Bool {
-        let velocitySelections = VelocitySelections.sharedInstance
-        guard let firstSelection = velocitySelections.selections.first else { return false }
+        guard let firstSelection = interfaceState.selectedDifference else { return false }
         return firstSelection.from > 0
     }
     
     func canGoLater() -> Bool {
-        let velocitySelections = VelocitySelections.sharedInstance
-        guard let lastSelection = velocitySelections.selections.last else { return false }
-        return lastSelection.to < DataModel.sharedInstance.points.count - 1
+        guard let selectedDifference = interfaceState.selectedDifference else { return false }
+        return selectedDifference.to < DataModel.sharedInstance.points.count - 1
     }
     
     func _earlier() {
         if !canGoEarlier() { return }
-        let velocitySelections = VelocitySelections.sharedInstance
-        guard let firstSelection = velocitySelections.selections.first else { return }
-        velocitySelections.selections.removeFirst()
-        let newDifference = (from: firstSelection.from - 1, to: firstSelection.to - 1)
-        velocitySelections.selections.insert(newDifference, atIndex: 0)
+        guard let selectedDifference = interfaceState.selectedDifference else { return }
+        let newDifference = (from: selectedDifference.from - 1, to: selectedDifference.to - 1)
+        interfaceState.selectedDifference = newDifference
         laterButton.enabled = true
         earlierButton.enabled = canGoEarlier()
         velocitiesView.setNeedsDisplay()
@@ -43,11 +41,9 @@ class VelocitiesViewController: UIViewController {
         
     func _later() {
         if !canGoLater() { return }
-        let velocitySelections = VelocitySelections.sharedInstance
-        guard let lastSelection = velocitySelections.selections.last else { return }
-        velocitySelections.selections.removeLast()
-        let newDifference = (from: lastSelection.from + 1, to: lastSelection.to + 1)
-        velocitySelections.selections.append(newDifference)
+        guard let selectedDifference = interfaceState.selectedDifference else { return }
+        let newDifference = (from: selectedDifference.from + 1, to: selectedDifference.to + 1)
+        interfaceState.selectedDifference = newDifference
         laterButton.enabled = canGoLater()
         earlierButton.enabled = true
         velocitiesView.setNeedsDisplay()
@@ -62,14 +58,14 @@ class VelocitiesViewController: UIViewController {
     }
     
     @IBAction func differences(sender: UIBarButtonItem) {
-        VelocitySelections.sharedInstance.showingVelocities = false
+        interfaceState.showingVelocities = false
         differencesButton.style = .Done
         veloctiesButton.style = .Plain
         velocitiesView.setNeedsDisplay()
     }
     
     @IBAction func velocities(sender: UIBarButtonItem) {
-        VelocitySelections.sharedInstance.showingVelocities = true
+        interfaceState.showingVelocities = true
         differencesButton.style = .Plain
         veloctiesButton.style = .Done
         velocitiesView.setNeedsDisplay()
@@ -77,14 +73,13 @@ class VelocitiesViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if velocitiesView.velocitySelections.selections.count == 0 {
-            velocitiesView.addSelection((from:0, to:1))
+        if interfaceState.selectedDifference == nil {
+            interfaceState.selectedDifference = ((from:0, to:1))
         }
         earlierButton.enabled = canGoEarlier()
         laterButton.enabled = canGoLater()
-        let showingVelocities = VelocitySelections.sharedInstance.showingVelocities
-        differencesButton.style = showingVelocities ? .Plain : .Done
-        veloctiesButton.style = showingVelocities ? .Done : .Plain
+        differencesButton.style = interfaceState.showingVelocities ? .Plain : .Done
+        veloctiesButton.style = interfaceState.showingVelocities ? .Done : .Plain
     }
 
     override func viewDidLoad() {

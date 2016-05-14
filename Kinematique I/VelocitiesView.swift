@@ -8,25 +8,15 @@
 
 import UIKit
 
-let velocityScale: CGFloat = 1.5
-
 // Constants for drawing velocities
 let differenceFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.2, 0.3, 0.7, 0.9])
 let differenceStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
 
 class VelocitiesView: PlaneView {
-        
-    func addSelection(difference: Difference) {
-        velocitySelections.selections.append(difference)
-    }
     
     func isSelectedIndex(index: Int) -> Bool {
-        for difference in velocitySelections.selections {
-            if index == difference.from || index == difference.to {
-                return true
-            }
-        }
-        return false
+        guard let difference = interfaceState.selectedDifference else { return false }
+        return index == difference.from || index == difference.to
     }
 
     override func drawRect(rect: CGRect) {
@@ -75,15 +65,19 @@ class VelocitiesView: PlaneView {
         CGContextSetFillColorWithColor(context, differenceFillColor)
         CGContextSetStrokeColorWithColor(context, differenceStrokeColor)
         CGContextSetLineWidth(context, vectorStrokeWidth)
-        for difference in velocitySelections.selections {
+        if let difference = interfaceState.selectedDifference {
             let fromPoint = dataModel.points[difference.from]
             let fromTime = dataModel.times[difference.from]
             let toPoint = dataModel.points[difference.to]
             let toTime = dataModel.times[difference.to]
-            let deltaScale: CGFloat = velocitySelections.showingVelocities ? velocityScale / CGFloat(toTime - fromTime) : 1
-            let delta = CGPointMake(deltaScale * (toPoint.x - fromPoint.x), deltaScale * (toPoint.y - fromPoint.y))
-            let scaledToPoint = CGPointMake(fromPoint.x + delta.x, fromPoint.y + delta.y)
-            addVector(context, fromOrigin: fromPoint, toPoint: scaledToPoint)
+            if interfaceState.showingVelocities {
+                let deltaTime: CGFloat = CGFloat(toTime - fromTime)
+                let delta = CGPointMake((toPoint.x - fromPoint.x) / deltaTime, (toPoint.y - fromPoint.y) / deltaTime)
+                let fromPointPlusDelta = CGPointMake(fromPoint.x + delta.x, fromPoint.y + delta.y)
+                addVector(context, fromOrigin: fromPoint, toPoint: fromPointPlusDelta)
+            } else {
+                addVector(context, fromOrigin: fromPoint, toPoint: toPoint)
+            }
         }
         
         CGContextRestoreGState(context)

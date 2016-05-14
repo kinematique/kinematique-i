@@ -34,12 +34,13 @@ let labelCenteringAdjustment: CGFloat = 12
 
 class PlaneView: UIView {
     
+    let interfaceState = InterfaceState.sharedInstance
+    
     static var fullHeight: CGFloat = 1000 // a placeholder
     
     var scale: CGFloat = 1.0
     
     let dataModel = DataModel.sharedInstance
-    let velocitySelections = VelocitySelections.sharedInstance
     
     func setOrigin(origin: CGPoint) {
         dataModel.origin = origin
@@ -52,7 +53,7 @@ class PlaneView: UIView {
             dataModel.initialTime = now
         }
         dataModel.points.append(point)
-        dataModel.times.append(now - dataModel.initialTime!)
+        dataModel.times.append(now - dataModel.initialTime)
         dataModel.labels.append(String(dataModel.points.count))
         setNeedsDisplay()
     }
@@ -65,8 +66,8 @@ class PlaneView: UIView {
         dataModel.initialTime = nil
         dataModel.times.removeAll()
         dataModel.labels.removeAll()
-        velocitySelections.selections.removeAll()
-        velocitySelections.showingVelocities = false
+        interfaceState.selectedDifference = nil
+        interfaceState.showingVelocities = false
         setNeedsDisplay()
     }
     

@@ -14,8 +14,8 @@ class DataModel {
     static let sharedInstance = DataModel()
     
     var origin: CGPoint?
-
-    var initialTime: CFAbsoluteTime? = nil // this is set to the time that the first point is added    
+    
+    var initialTime: CFTimeInterval! = nil
     
     var points: [CGPoint] = []
     
@@ -25,17 +25,24 @@ class DataModel {
     
 }
 
-
+// In principle, the difference between any to vectors can be shown.
+// In actuality, `to` is always `from + 1`.
 typealias Difference = (from: Int, to: Int)
 
-class VelocitySelections {
+class InterfaceState {
     
-    static let sharedInstance = VelocitySelections()
+    static let sharedInstance = InterfaceState()
     
-    var selections: [Difference] = []
+    var settingOrigin: Bool = true
+    
+    var selectedDifference: Difference? = nil
+    
+    var tracerResetTime: CFAbsoluteTime! = nil
+    
+    var tracerTimeInterval: CFTimeInterval = 0
+
+    var showingParabolic: Bool = false
     
     var showingVelocities: Bool = false
-    
-    var showingParabolic: Bool = false
     
 }

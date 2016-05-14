@@ -19,44 +19,42 @@ class TracerViewController: UIViewController {
     @IBOutlet var nextButton: UIBarButtonItem!
     @IBOutlet var circularButton: UIBarButtonItem!
     @IBOutlet var parabolicButton: UIBarButtonItem!
-
-    var settingOrigin = true
     
     var displayLink: CADisplayLink! = nil
-    
-    var viewAppearingTime: CFAbsoluteTime = 0.0
+        
+    let interfaceState = InterfaceState.sharedInstance
     
     private func _settingOrigin() {
-        if !settingOrigin {
-            settingOrigin = true
+        if !interfaceState.settingOrigin {
+            interfaceState.settingOrigin = true
             setOriginButton.style = .Done
             addPointsButton.style = .Plain
         }
     }
     
     private func _addingPoints() {
-        if settingOrigin {
-            settingOrigin = false
+        if interfaceState.settingOrigin {
+            interfaceState.settingOrigin = false
             setOriginButton.style = .Plain
             addPointsButton.style = .Done
         }
     }
     
     @IBAction func circular(sender: UIBarButtonItem) {
-        VelocitySelections.sharedInstance.showingParabolic = false
+        interfaceState.showingParabolic = false
         circularButton.style = .Done
         parabolicButton.style = .Plain
-        viewAppearingTime = CFAbsoluteTimeGetCurrent()
-        tracerView.timeInterval = 0
+        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        interfaceState.tracerTimeInterval = 0
         _clear(false)
     }
     
     @IBAction func parabolic(sender: UIBarButtonItem) {
-        VelocitySelections.sharedInstance.showingParabolic = true
+        interfaceState.showingParabolic = true
         circularButton.style = .Plain
         parabolicButton.style = .Done
-        viewAppearingTime = CFAbsoluteTimeGetCurrent()
-        tracerView.timeInterval = 0
+        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        interfaceState.tracerTimeInterval = 0
         _clear(false)
     }
     
@@ -84,7 +82,7 @@ class TracerViewController: UIViewController {
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
         let tapPoint: CGPoint = sender.locationOfTouch(0, inView: planeView)
-        if settingOrigin {
+        if interfaceState.settingOrigin {
             planeView.setOrigin(tapPoint)
             // once the origin has been set, the user can clear or add points
             clearButton.enabled = true
@@ -107,23 +105,21 @@ class TracerViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        viewAppearingTime = CFAbsoluteTimeGetCurrent()
-        tracerView.timeInterval = 0
+        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        interfaceState.tracerTimeInterval = 0
         tracerView.setNeedsDisplay()
         displayLink.paused = false
-        circularButton.style = VelocitySelections.sharedInstance.showingParabolic ? .Plain : .Done
-        parabolicButton.style = VelocitySelections.sharedInstance.showingParabolic ? .Done : .Plain
+        circularButton.style = interfaceState.showingParabolic ? .Plain : .Done
+        parabolicButton.style = interfaceState.showingParabolic ? .Done : .Plain
     }
     
     override func viewWillDisappear(animated: Bool) {
         displayLink.paused = true
-        tracerView.timeInterval = nil
         super.viewWillDisappear(animated)
     }
     
     func prepareForVSync(displayLink: CADisplayLink) {
-        let timeInterval = CFAbsoluteTimeGetCurrent() + displayLink.duration - viewAppearingTime
-        tracerView.timeInterval = timeInterval
+        interfaceState.tracerTimeInterval = CFAbsoluteTimeGetCurrent() + displayLink.duration - interfaceState.tracerResetTime
         tracerView.setNeedsDisplay()
     }
     
