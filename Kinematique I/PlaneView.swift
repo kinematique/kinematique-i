@@ -30,7 +30,6 @@ let vectorStrokeWidth: CGFloat = 1
 let labelProximity: CGFloat = 24
 let labelTextColor = UIColor(white: 0.5, alpha: 1.0).CGColor
 let labelFont = UIFont.systemFontOfSize(24)
-let labelCenteringAdjustment: CGFloat = 12
 
 class PlaneView: UIView {
     
@@ -116,29 +115,31 @@ class PlaneView: UIView {
         let attributedString = NSAttributedString(string: label, attributes: attributes)
         let line = CTLineCreateWithAttributedString(attributedString)
         CGContextSaveGState(context)
-        CGContextTranslateCTM(context, origin.x - labelCenteringAdjustment, origin.y + labelCenteringAdjustment)
+        CGContextTranslateCTM(context, origin.x + halfLength * cos(adjustedAngle), origin.y + halfLength * sin(adjustedAngle))
         let transform = CGAffineTransformMakeScale(1, -1)
         CGContextConcatCTM(context, transform)
-        CGContextSetTextPosition(context, halfLength * cos(adjustedAngle), -halfLength * sin(adjustedAngle))
+        let labelSize = CTLineGetImageBounds(line, context).size
+        CGContextSetTextPosition(context, -labelSize.width / 2, -labelSize.height / 2)
         CTLineDraw(line, context)
         CGContextRestoreGState(context)
     }
 
     override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()!
         
-        // Add axes if the origin has been set
-        if let origin = dataModel.origin {
-            CGContextSetFillColorWithColor(context, axesStrokeColor)
-            CGContextSetLineWidth(context, axesWidth)
-            addAxes(context, forOrigin: origin, frameSize: frame.size)
-        }
+        guard let origin = dataModel.origin else { return }
+        
+        let context = UIGraphicsGetCurrentContext()!
+
+        // Add axes
+        CGContextSetFillColorWithColor(context, axesStrokeColor)
+        CGContextSetLineWidth(context, axesWidth)
+        addAxes(context, forOrigin: origin, frameSize: frame.size)
 
         // Add the points as filled gray circles with a thin stroke
+        CGContextSetFillColorWithColor(context, pointsFillColor)
+        CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
+        CGContextSetLineWidth(context, pointsStrokeWidth)
         for point in dataModel.points {
-            CGContextSetFillColorWithColor(context, pointsFillColor)
-            CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
-            CGContextSetLineWidth(context, pointsStrokeWidth)
             _addCircle(context, atPoint: point)
         }
         
@@ -158,11 +159,11 @@ class PlaneView: UIView {
         for idx in 0..<dataModel.points.count {
             let point = dataModel.points[idx]
             let label = dataModel.labels[idx]
-            let dy = point.y - dataModel.origin!.y
-            let dx = point.x - dataModel.origin!.x
+            let dy = point.y - origin.y
+            let dx = point.x - origin.x
             let halfLength: CGFloat = sqrt(dx * dx + dy * dy) / 2
             let adjustedAngle: CGFloat = atan2(dy, dx) + labelProximity / halfLength
-            labelVector(context, fromOrigin: dataModel.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
+            labelVector(context, fromOrigin: origin, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
         
     }

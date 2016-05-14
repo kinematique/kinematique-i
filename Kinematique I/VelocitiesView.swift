@@ -31,17 +31,18 @@ class VelocitiesView: PlaneView {
         
         let pointsCount = dataModel.points.count
         
-        // Add the vectors
+        // Add the selected vectors.
         CGContextSetFillColorWithColor(context, vectorFillColor)
         CGContextSetStrokeColorWithColor(context, vectorStrokeColor)
         CGContextSetLineWidth(context, vectorStrokeWidth)
         for idx in 0..<pointsCount {
+            // Only draw the selected vectors.
             if !isSelectedIndex(idx) { continue }
             let point = dataModel.points[idx]
             addVector(context, fromOrigin: dataModel.origin!, toPoint: point)
         }
         
-        // Label the vectors
+        // Label the selected vectors.
         let attributes: [String: AnyObject] = [
             NSForegroundColorAttributeName: labelTextColor,
             NSFontAttributeName: labelFont
@@ -57,25 +58,27 @@ class VelocitiesView: PlaneView {
             labelVector(context, fromOrigin: dataModel.origin!, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
         
-        // Add the selected velocities
-        CGContextSetFillColorWithColor(context, differenceFillColor)
-        CGContextSetStrokeColorWithColor(context, differenceStrokeColor)
-        CGContextSetLineWidth(context, vectorStrokeWidth)
+        // Add and label the difference or velocity
         if let difference = interfaceState.selectedDifference {
             let fromPoint = dataModel.points[difference.from]
             let fromTime = dataModel.times[difference.from]
             let toPoint = dataModel.points[difference.to]
             let toTime = dataModel.times[difference.to]
-            if interfaceState.showingVelocities {
-                let deltaTime: CGFloat = CGFloat(toTime - fromTime)
-                let delta = CGPointMake((toPoint.x - fromPoint.x) / deltaTime, (toPoint.y - fromPoint.y) / deltaTime)
-                let fromPointPlusDelta = CGPointMake(fromPoint.x + delta.x, fromPoint.y + delta.y)
-                addVector(context, fromOrigin: fromPoint, toPoint: fromPointPlusDelta)
-            } else {
-                addVector(context, fromOrigin: fromPoint, toPoint: toPoint)
-            }
+            let deltaTime: CGFloat = interfaceState.showingVelocities ? CGFloat(toTime - fromTime) : 1
+            let delta = CGPointMake((toPoint.x - fromPoint.x) / deltaTime, (toPoint.y - fromPoint.y) / deltaTime)
+            let fromPointPlusDelta = CGPointMake(fromPoint.x + delta.x, fromPoint.y + delta.y)
+            CGContextSetFillColorWithColor(context, differenceFillColor)
+            CGContextSetStrokeColorWithColor(context, differenceStrokeColor)
+            CGContextSetLineWidth(context, vectorStrokeWidth)
+            addVector(context, fromOrigin: fromPoint, toPoint: fromPointPlusDelta)
+            // Label the selected difference or velocity
+            let label = "\(dataModel.labels[difference.from]) to \(dataModel.labels[difference.to])"
+            let halfLength: CGFloat = sqrt(delta.x * delta.x + delta.y * delta.y) / 2
+            // Note: using twice the proximity for these longer labels
+            let adjustedAngle: CGFloat = atan2(delta.y, delta.x) + 2 * labelProximity / halfLength
+            labelVector(context, fromOrigin: fromPoint, adjustedAngle: adjustedAngle, halfLength: halfLength, attributes: attributes, label: label)
         }
-        
+    
     }
 
 }
