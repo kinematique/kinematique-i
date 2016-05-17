@@ -7,27 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D32202EB1CCAB9F80010B3A3 /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */; };
+		D32202EB1CCAB9F80010B3A3 /* PositionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32202EA1CCAB9F80010B3A3 /* PositionsView.swift */; };
 		D32AEAF11CE4342800847D70 /* VelocitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */; };
 		D32AEAF31CE4370100847D70 /* VelocitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AEAF21CE4370100847D70 /* VelocitiesView.swift */; };
+		D35047901CEB9021006CDA3F /* AccerationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350478F1CEB9021006CDA3F /* AccerationsViewController.swift */; };
+		D35047921CEB903A006CDA3F /* AccelerationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35047911CEB903A006CDA3F /* AccelerationsView.swift */; };
 		D368FA3D1CDAE7720078A5A0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D368FA3C1CDAE7720078A5A0 /* Model.swift */; };
 		D39169F11CDC07100068AA09 /* TracerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39169F01CDC07100068AA09 /* TracerView.swift */; };
 		D396A8521CCAB02400DB48A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D396A8511CCAB02400DB48A2 /* AppDelegate.swift */; };
-		D396A8541CCAB02400DB48A2 /* TracerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D396A8531CCAB02400DB48A2 /* TracerViewController.swift */; };
+		D396A8541CCAB02400DB48A2 /* PositionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D396A8531CCAB02400DB48A2 /* PositionsViewController.swift */; };
 		D396A8571CCAB02400DB48A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D396A8551CCAB02400DB48A2 /* Main.storyboard */; };
 		D396A8591CCAB02400DB48A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D396A8581CCAB02400DB48A2 /* Assets.xcassets */; };
 		D396A85C1CCAB02400DB48A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D396A85A1CCAB02400DB48A2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneView.swift; sourceTree = "<group>"; };
+		D32202EA1CCAB9F80010B3A3 /* PositionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionsView.swift; sourceTree = "<group>"; };
 		D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelocitiesViewController.swift; sourceTree = "<group>"; };
 		D32AEAF21CE4370100847D70 /* VelocitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelocitiesView.swift; sourceTree = "<group>"; };
+		D350478F1CEB9021006CDA3F /* AccerationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccerationsViewController.swift; sourceTree = "<group>"; };
+		D35047911CEB903A006CDA3F /* AccelerationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerationsView.swift; sourceTree = "<group>"; };
 		D368FA3C1CDAE7720078A5A0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D39169F01CDC07100068AA09 /* TracerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracerView.swift; sourceTree = "<group>"; };
 		D396A84E1CCAB02400DB48A2 /* Kinematique I.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kinematique I.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D396A8511CCAB02400DB48A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D396A8531CCAB02400DB48A2 /* TracerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracerViewController.swift; sourceTree = "<group>"; };
+		D396A8531CCAB02400DB48A2 /* PositionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionsViewController.swift; sourceTree = "<group>"; };
 		D396A8561CCAB02400DB48A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D396A8581CCAB02400DB48A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D396A85B1CCAB02400DB48A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,11 +69,13 @@
 			isa = PBXGroup;
 			children = (
 				D396A8511CCAB02400DB48A2 /* AppDelegate.swift */,
-				D396A8531CCAB02400DB48A2 /* TracerViewController.swift */,
+				D396A8531CCAB02400DB48A2 /* PositionsViewController.swift */,
 				D39169F01CDC07100068AA09 /* TracerView.swift */,
-				D32202EA1CCAB9F80010B3A3 /* PlaneView.swift */,
+				D32202EA1CCAB9F80010B3A3 /* PositionsView.swift */,
 				D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */,
 				D32AEAF21CE4370100847D70 /* VelocitiesView.swift */,
+				D350478F1CEB9021006CDA3F /* AccerationsViewController.swift */,
+				D35047911CEB903A006CDA3F /* AccelerationsView.swift */,
 				D368FA3C1CDAE7720078A5A0 /* Model.swift */,
 				D396A8551CCAB02400DB48A2 /* Main.storyboard */,
 				D396A8581CCAB02400DB48A2 /* Assets.xcassets */,
@@ -151,10 +157,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D39169F11CDC07100068AA09 /* TracerView.swift in Sources */,
-				D396A8541CCAB02400DB48A2 /* TracerViewController.swift in Sources */,
-				D32202EB1CCAB9F80010B3A3 /* PlaneView.swift in Sources */,
+				D396A8541CCAB02400DB48A2 /* PositionsViewController.swift in Sources */,
+				D32202EB1CCAB9F80010B3A3 /* PositionsView.swift in Sources */,
 				D32AEAF11CE4342800847D70 /* VelocitiesViewController.swift in Sources */,
 				D32AEAF31CE4370100847D70 /* VelocitiesView.swift in Sources */,
+				D35047901CEB9021006CDA3F /* AccerationsViewController.swift in Sources */,
+				D35047921CEB903A006CDA3F /* AccelerationsView.swift in Sources */,
 				D396A8521CCAB02400DB48A2 /* AppDelegate.swift in Sources */,
 				D368FA3D1CDAE7720078A5A0 /* Model.swift in Sources */,
 			);

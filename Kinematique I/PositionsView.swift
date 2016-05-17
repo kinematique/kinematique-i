@@ -1,5 +1,5 @@
 //
-//  PlaneView.swift
+//  PositionsView.swift
 //  Kinematique I
 //
 //  Created by Brian Hill on 4/22/16.
@@ -31,7 +31,7 @@ let labelProximity: CGFloat = 24
 let labelTextColor = UIColor(white: 0.5, alpha: 1.0).CGColor
 let labelFont = UIFont.systemFontOfSize(24)
 
-class PlaneView: UIView {
+class PositionsView: UIView {
     
     let interfaceState = InterfaceState.sharedInstance
     
@@ -63,7 +63,8 @@ class PlaneView: UIView {
         dataModel.initialTime = nil
         dataModel.times.removeAll()
         dataModel.labels.removeAll()
-        interfaceState.selectedDifference = nil
+        interfaceState.selectedPositionPair = nil
+        interfaceState.selectedVelocityPair = nil
         interfaceState.showingVelocities = false
         setNeedsDisplay()
     }

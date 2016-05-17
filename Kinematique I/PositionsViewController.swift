@@ -1,5 +1,5 @@
 //
-//  TracerViewController.swift
+//  Positions   ViewController.swift
 //  Kinematique I
 //
 //  Created by Brian Hill on 4/22/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class TracerViewController: UIViewController {
+class PositionsViewController: UIViewController {
     
     @IBOutlet var tracerView: TracerView!
-    @IBOutlet var planeView: PlaneView!
+    @IBOutlet var positionsView: PositionsView!
     
     @IBOutlet var setOriginButton: UIBarButtonItem!
     @IBOutlet var addPointsButton: UIBarButtonItem!
@@ -72,7 +72,7 @@ class TracerViewController: UIViewController {
             clearButton.enabled = false
             addPointsButton.enabled = false
         }
-        planeView.clear(clearOrigin)
+        positionsView.clear(clearOrigin)
         nextButton.enabled = false
     }
     
@@ -81,14 +81,14 @@ class TracerViewController: UIViewController {
     }
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
-        let tapPoint: CGPoint = sender.locationOfTouch(0, inView: planeView)
+        let tapPoint: CGPoint = sender.locationOfTouch(0, inView: positionsView)
         if interfaceState.settingOrigin {
-            planeView.setOrigin(tapPoint)
+            positionsView.setOrigin(tapPoint)
             // once the origin has been set, the user can clear or add points
             clearButton.enabled = true
             addPointsButton.enabled = true
         } else {
-            planeView.addPoint(tapPoint)
+            positionsView.addPoint(tapPoint)
             // once the user has added one or more points, they can hit next
             if !nextButton.enabled {
                 nextButton.enabled = true

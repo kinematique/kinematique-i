@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Tracer View Controller-->
+        <!--Positions View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="Tracer View Controller" customClass="TracerViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Positions View Controller" customClass="PositionsViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g8R-wz-lUt"/>
                         <viewControllerLayoutGuide type="bottom" id="ofV-p2-HAC"/>
@@ -21,23 +21,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E5-1g-8C4" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpb-ai-dCI" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="WqW-sn-0os" appends="YES" id="eb6-kp-Qzf"/>
+                                    <outletCollection property="gestureRecognizers" destination="qt1-yj-Jul" appends="YES" id="ejo-5x-D9b"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="N8w-T8-bfx"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="YuO-cJ-04f"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="avG-ZU-QoB"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="gs1-uu-1iC"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="ia7-yk-5cA"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="lju-HO-tz7"/>
+                            <constraint firstItem="Fpb-ai-dCI" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="avK-eb-w29"/>
+                            <constraint firstItem="Fpb-ai-dCI" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="bZU-SF-Ggb"/>
+                            <constraint firstItem="Fpb-ai-dCI" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="fKJ-M3-taS"/>
+                            <constraint firstItem="Fpb-ai-dCI" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="iVM-Qa-qbn"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="pXF-uB-6qU"/>
-                            <constraint firstItem="9E5-1g-8C4" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="uAV-E3-gkb"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -69,8 +71,8 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Kinematique I" id="oJL-E9-TOJ">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="IMw-9M-2Hk">
+                    <navigationItem key="navigationItem" title="Positions" id="oJL-E9-TOJ">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Velocities" id="IMw-9M-2Hk">
                             <connections>
                                 <segue destination="Jpk-Ij-nzh" kind="show" id="Auc-c2-wMR"/>
                             </connections>
@@ -82,24 +84,24 @@
                         <outlet property="clearButton" destination="uW9-fb-BWD" id="fGH-iH-rq5"/>
                         <outlet property="nextButton" destination="IMw-9M-2Hk" id="OVL-Vc-Kv1"/>
                         <outlet property="parabolicButton" destination="DCj-zJ-cIj" id="4dF-LX-VhH"/>
-                        <outlet property="planeView" destination="9E5-1g-8C4" id="WwX-xS-lS9"/>
+                        <outlet property="positionsView" destination="Fpb-ai-dCI" id="Imt-wd-awD"/>
                         <outlet property="setOriginButton" destination="xzZ-JF-Ekr" id="R0a-p0-KZw"/>
                         <outlet property="tracerView" destination="q0w-PO-a4k" id="hyr-1h-V33"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="WqW-sn-0os">
+                <tapGestureRecognizer id="qt1-yj-Jul">
                     <connections>
-                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="LMw-WW-WYO"/>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="a6S-gf-hd9"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="559" y="591"/>
         </scene>
-        <!--Velocities View Controller-->
+        <!--Velocities-->
         <scene sceneID="rGa-dq-HaH">
             <objects>
-                <viewController id="Jpk-Ij-nzh" customClass="VelocitiesViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Positions" id="Jpk-Ij-nzh" userLabel="Velocities" customClass="VelocitiesViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b4b-QR-Xd3"/>
                         <viewControllerLayoutGuide type="bottom" id="prS-eA-Gm6"/>
@@ -108,7 +110,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" customClass="PlaneView" customModule="Kinematique_I" customModuleProvider="target">
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -146,23 +148,95 @@
                                 <action selector="differences:" destination="Jpk-Ij-nzh" id="ZdN-Am-2sC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Velocities" id="ThM-Z8-4by">
+                        <barButtonItem title="Velocities" id="ThM-Z8-4by" userLabel="Velocities Button">
                             <connections>
                                 <action selector="velocities:" destination="Jpk-Ij-nzh" id="PWu-fI-ONy"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
+                    <navigationItem key="navigationItem" title="Velocities" id="fUB-5x-5gT">
+                        <barButtonItem key="rightBarButtonItem" title="Accelerations" id="WSB-ef-nEd">
+                            <connections>
+                                <segue destination="XoF-Jg-Nmw" kind="show" id="c4N-0I-0L1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="differencesButton" destination="dmq-99-tCu" id="r3H-Os-Fkf"/>
                         <outlet property="earlierButton" destination="P1T-1w-ntK" id="3oQ-iO-9WY"/>
                         <outlet property="laterButton" destination="t4Z-lc-aUz" id="saA-XM-cMx"/>
+                        <outlet property="velocitiesButton" destination="ThM-Z8-4by" id="4DN-F6-aqd"/>
                         <outlet property="velocitiesView" destination="QMv-Oe-yWI" id="D4K-vN-dqZ"/>
-                        <outlet property="veloctiesButton" destination="ThM-Z8-4by" id="Uip-Ds-fvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxt-PU-cld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1232" y="591"/>
+            <point key="canvasLocation" x="1246" y="591"/>
+        </scene>
+        <!--Accelerations-->
+        <scene sceneID="cBb-LF-wR1">
+            <objects>
+                <viewController id="XoF-Jg-Nmw" customClass="AccerationsViewController" customModule="Kinematique_I" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nCk-D2-QlX"/>
+                        <viewControllerLayoutGuide type="bottom" id="f2O-5c-Bgz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nmR-XY-krB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-hx-qWA" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkP-Zf-QNi" customClass="AccelerationsView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Sy-hx-qWA" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="1GT-Xj-oPl"/>
+                            <constraint firstItem="DkP-Zf-QNi" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="F7S-1w-IMQ"/>
+                            <constraint firstItem="DkP-Zf-QNi" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="FrB-06-1Pg"/>
+                            <constraint firstItem="5Sy-hx-qWA" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="KSM-sy-j85"/>
+                            <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="MHP-kF-B7H"/>
+                            <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="WU1-jD-fqf"/>
+                            <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="gfb-eA-kRs"/>
+                            <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="kTH-N4-tkW"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Earlier" id="2lm-aB-mnF">
+                            <connections>
+                                <action selector="earlier:" destination="XoF-Jg-Nmw" id="1gS-Np-7KM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Later" id="rkU-Ga-WzK">
+                            <connections>
+                                <action selector="later:" destination="XoF-Jg-Nmw" id="zyk-xb-Q4A"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="S86-Xm-2FE"/>
+                        <barButtonItem title="Differences" id="Tht-Cj-GcY">
+                            <connections>
+                                <action selector="differences:" destination="XoF-Jg-Nmw" id="qTo-14-Djm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Accelerations" id="HHm-cG-2sL"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Accelerations" id="HKc-XG-nOj"/>
+                    <connections>
+                        <outlet property="accelerationsButton" destination="HHm-cG-2sL" id="Dug-Sl-TAV"/>
+                        <outlet property="accelerationsView" destination="DkP-Zf-QNi" id="GzO-Sr-Ko4"/>
+                        <outlet property="differencesButton" destination="Tht-Cj-GcY" id="uZs-fr-xn1"/>
+                        <outlet property="earlierButton" destination="2lm-aB-mnF" id="yKl-Lm-nyC"/>
+                        <outlet property="laterButton" destination="rkU-Ga-WzK" id="OIQ-X5-Me4"/>
+                        <outlet property="velocitiesView" destination="5Sy-hx-qWA" id="wLj-wQ-aGk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mNF-mT-0dr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1952" y="591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jc7-xj-8Th">
