@@ -26,13 +26,6 @@ class VelocitiesView: PositionsView {
         let context = UIGraphicsGetCurrentContext()!
         
         if !showingAllVelocities {
-
-            // Add axes if the origin has been set
-            if let origin = dataModel.origin {
-                CGContextSetFillColorWithColor(context, axesStrokeColor)
-                CGContextSetLineWidth(context, axesWidth)
-                addAxes(context, forOrigin: origin, frameSize: frame.size)
-            }
         
             let pointsCount = dataModel.points.count
             

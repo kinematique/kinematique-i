@@ -8,10 +8,6 @@
 
 import UIKit
 
-// Constants for drawing axes
-let axesStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
-let axesWidth: CGFloat = 3
-
 // Constants for drawing points
 let pointsFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])
 let pointRadius: CGFloat = 10
@@ -39,11 +35,6 @@ class PositionsView: UIView {
     
     let dataModel = DataModel.sharedInstance
     
-    func setOrigin(origin: CGPoint) {
-        dataModel.origin = origin
-        setNeedsDisplay()
-    }
-    
     func addPoint(point: CGPoint) {
         let now = CFAbsoluteTimeGetCurrent()
         if dataModel.points.count == 0 {
@@ -67,15 +58,6 @@ class PositionsView: UIView {
         interfaceState.selectedVelocityPair = nil
         interfaceState.showingVelocities = false
         setNeedsDisplay()
-    }
-    
-    func addAxes(context: CGContext, forOrigin origin: CGPoint, frameSize size: CGSize) {
-        CGContextBeginPath(context)
-        CGContextMoveToPoint(context, origin.x, 0)
-        CGContextAddLineToPoint(context, origin.x, size.height)
-        CGContextMoveToPoint(context, 0, origin.y)
-        CGContextAddLineToPoint(context, size.width, origin.y)
-        CGContextDrawPath(context, .Stroke)
     }
     
     private func _addCircle(context: CGContext, atPoint point: CGPoint) {
@@ -127,15 +109,10 @@ class PositionsView: UIView {
 
     override func drawRect(rect: CGRect) {
         
+        let context = UIGraphicsGetCurrentContext()!
+        
         guard let origin = dataModel.origin else { return }
         
-        let context = UIGraphicsGetCurrentContext()!
-
-        // Add axes
-        CGContextSetFillColorWithColor(context, axesStrokeColor)
-        CGContextSetLineWidth(context, axesWidth)
-        addAxes(context, forOrigin: origin, frameSize: frame.size)
-
         // Add the points as filled gray circles with a thin stroke
         CGContextSetFillColorWithColor(context, pointsFillColor)
         CGContextSetStrokeColorWithColor(context, pointsStrokeColor)

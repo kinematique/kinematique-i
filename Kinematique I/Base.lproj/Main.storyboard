@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ijY-cg-gJy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ijY-cg-gJy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -21,6 +21,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBi-e7-bMo" customClass="AxesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpb-ai-dCI" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <gestureRecognizers/>
@@ -32,14 +35,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="LBi-e7-bMo" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="2lP-GV-bw3"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="N8w-T8-bfx"/>
+                            <constraint firstItem="LBi-e7-bMo" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="T3L-bh-6tP"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="YuO-cJ-04f"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="avG-ZU-QoB"/>
                             <constraint firstItem="Fpb-ai-dCI" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="avK-eb-w29"/>
                             <constraint firstItem="Fpb-ai-dCI" firstAttribute="centerY" secondItem="7eR-6G-SoH" secondAttribute="centerY" id="bZU-SF-Ggb"/>
                             <constraint firstItem="Fpb-ai-dCI" firstAttribute="centerX" secondItem="7eR-6G-SoH" secondAttribute="centerX" id="fKJ-M3-taS"/>
                             <constraint firstItem="Fpb-ai-dCI" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="iVM-Qa-qbn"/>
+                            <constraint firstItem="LBi-e7-bMo" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="o2V-ot-7XR"/>
                             <constraint firstItem="q0w-PO-a4k" firstAttribute="height" secondItem="7eR-6G-SoH" secondAttribute="height" id="pXF-uB-6qU"/>
+                            <constraint firstItem="LBi-e7-bMo" firstAttribute="width" secondItem="7eR-6G-SoH" secondAttribute="width" id="qy0-Kd-TK7"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -80,6 +87,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addPointsButton" destination="LtJ-Fv-mVc" id="HBf-pb-a5t"/>
+                        <outlet property="axesView" destination="LBi-e7-bMo" id="95D-Zx-2vT"/>
                         <outlet property="circularButton" destination="puu-ZT-QZ4" id="U8H-GA-TsE"/>
                         <outlet property="clearButton" destination="uW9-fb-BWD" id="fGH-iH-rq5"/>
                         <outlet property="nextButton" destination="IMw-9M-2Hk" id="OVL-Vc-Kv1"/>
@@ -110,6 +118,9 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2O-Ju-5Ib" customClass="AxesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            </view>
                             <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,10 +135,14 @@
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="4lP-xj-LbV"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="82a-qc-dFG"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="C1P-FM-7hj"/>
+                            <constraint firstItem="i2O-Ju-5Ib" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="IVK-Um-ae3"/>
+                            <constraint firstItem="i2O-Ju-5Ib" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="VUF-3r-vRF"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="bct-Mx-nuv"/>
+                            <constraint firstItem="i2O-Ju-5Ib" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="drB-jA-sml"/>
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="get-k8-DXh"/>
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="goA-vW-ICb"/>
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="hF0-UD-3Bg"/>
+                            <constraint firstItem="i2O-Ju-5Ib" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="qVp-k4-TAE"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -182,29 +197,37 @@
                         <viewControllerLayoutGuide type="bottom" id="f2O-5c-Bgz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nmR-XY-krB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-hx-qWA" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyR-Td-eH1" customClass="AxesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-hx-qWA" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkP-Zf-QNi" customClass="AccelerationsView" customModule="Kinematique_I" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="1GT-Xj-oPl"/>
+                            <constraint firstItem="MyR-Td-eH1" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="3xd-BO-t9g"/>
+                            <constraint firstItem="MyR-Td-eH1" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="4un-Lu-ZJc"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="F7S-1w-IMQ"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="FrB-06-1Pg"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="KSM-sy-j85"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="MHP-kF-B7H"/>
+                            <constraint firstItem="MyR-Td-eH1" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="PSE-fD-e5c"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="WU1-jD-fqf"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="gfb-eA-kRs"/>
+                            <constraint firstItem="MyR-Td-eH1" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="gzT-Ld-SLH"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="kTH-N4-tkW"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem title="Earlier" id="2lm-aB-mnF">
                             <connections>
@@ -258,7 +281,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBa-KQ-iuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-102" y="591"/>
+            <point key="canvasLocation" x="-141" y="591"/>
         </scene>
     </scenes>
 </document>

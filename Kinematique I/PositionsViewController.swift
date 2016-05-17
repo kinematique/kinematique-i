@@ -11,6 +11,7 @@ import UIKit
 class PositionsViewController: UIViewController {
     
     @IBOutlet var tracerView: TracerView!
+    @IBOutlet var axesView: AxesView!
     @IBOutlet var positionsView: PositionsView!
     
     @IBOutlet var setOriginButton: UIBarButtonItem!
@@ -23,6 +24,7 @@ class PositionsViewController: UIViewController {
     var displayLink: CADisplayLink! = nil
         
     let interfaceState = InterfaceState.sharedInstance
+    let dataModel = DataModel.sharedInstance
     
     private func _settingOrigin() {
         if !interfaceState.settingOrigin {
@@ -83,7 +85,8 @@ class PositionsViewController: UIViewController {
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
         let tapPoint: CGPoint = sender.locationOfTouch(0, inView: positionsView)
         if interfaceState.settingOrigin {
-            positionsView.setOrigin(tapPoint)
+            dataModel.origin = tapPoint
+            axesView.setNeedsDisplay()
             // once the origin has been set, the user can clear or add points
             clearButton.enabled = true
             addPointsButton.enabled = true
