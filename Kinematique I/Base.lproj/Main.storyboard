@@ -204,6 +204,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xb8-3c-91m" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-hx-qWA" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </view>
@@ -218,12 +222,16 @@
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="4un-Lu-ZJc"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="F7S-1w-IMQ"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="FrB-06-1Pg"/>
+                            <constraint firstItem="Xb8-3c-91m" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="Fzn-4U-6pQ"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="KSM-sy-j85"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="MHP-kF-B7H"/>
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="PSE-fD-e5c"/>
+                            <constraint firstItem="Xb8-3c-91m" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="TZw-CK-eG3"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="WU1-jD-fqf"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="gfb-eA-kRs"/>
+                            <constraint firstItem="Xb8-3c-91m" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="gnD-jY-9dx"/>
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="gzT-Ld-SLH"/>
+                            <constraint firstItem="Xb8-3c-91m" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="iAD-dJ-37I"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="kTH-N4-tkW"/>
                         </constraints>
                     </view>

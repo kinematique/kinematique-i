@@ -42,12 +42,32 @@ class PositionsViewController: UIViewController {
         }
     }
     
+    private func _clear(clearOrigin: Bool) {
+        if clearOrigin {
+            _settingOrigin()
+            clearButton.enabled = false
+            addPointsButton.enabled = false
+            dataModel.origin = nil
+        }
+        dataModel.points.removeAll()
+        dataModel.initialTime = nil
+        dataModel.times.removeAll()
+        dataModel.labels.removeAll()
+        interfaceState.selectedPositionPair = nil
+        interfaceState.selectedVelocityPair = nil
+        interfaceState.showingVelocities = false
+        interfaceState.showingAccelerations = false
+        positionsView.setNeedsDisplay()
+        nextButton.enabled = false
+    }
+    
     @IBAction func circular(sender: UIBarButtonItem) {
         interfaceState.showingParabolic = false
         circularButton.style = .Done
         parabolicButton.style = .Plain
         interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
         interfaceState.tracerTimeInterval = 0
+        // clear invoked this way does not clear the origin
         _clear(false)
     }
     
@@ -57,6 +77,7 @@ class PositionsViewController: UIViewController {
         parabolicButton.style = .Done
         interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
         interfaceState.tracerTimeInterval = 0
+        // clear invoked this way does not clear the origin
         _clear(false)
     }
     
@@ -67,19 +88,20 @@ class PositionsViewController: UIViewController {
     @IBAction func addPoints(sender: UIBarButtonItem) {
         _addingPoints()
     }
-    
-    func _clear(clearOrigin: Bool) {
-        if clearOrigin {
-            _settingOrigin()
-            clearButton.enabled = false
-            addPointsButton.enabled = false
-        }
-        positionsView.clear(clearOrigin)
-        nextButton.enabled = false
+
+    @IBAction func clear(sender: UIBarButtonItem) {
+        // clear invoked this way also clears the origin
+        _clear(true)
     }
     
-    @IBAction func clear(sender: UIBarButtonItem) {
-        _clear(true)
+    func addPoint(point: CGPoint) {
+        let now = CFAbsoluteTimeGetCurrent()
+        if dataModel.points.count == 0 {
+            dataModel.initialTime = now
+        }
+        dataModel.points.append(point)
+        dataModel.times.append(now - dataModel.initialTime)
+        dataModel.labels.append(String(dataModel.points.count))
     }
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
@@ -91,9 +113,10 @@ class PositionsViewController: UIViewController {
             clearButton.enabled = true
             addPointsButton.enabled = true
         } else {
-            positionsView.addPoint(tapPoint)
-            // once the user has added one or more points, they can hit next
-            if !nextButton.enabled {
+            addPoint(tapPoint)
+            positionsView.setNeedsDisplay()
+            // Once the user has added two points, they can hit next
+            if dataModel.points.count == 2 {
                 nextButton.enabled = true
             }
         }

@@ -35,31 +35,6 @@ class PositionsView: UIView {
     
     let dataModel = DataModel.sharedInstance
     
-    func addPoint(point: CGPoint) {
-        let now = CFAbsoluteTimeGetCurrent()
-        if dataModel.points.count == 0 {
-            dataModel.initialTime = now
-        }
-        dataModel.points.append(point)
-        dataModel.times.append(now - dataModel.initialTime)
-        dataModel.labels.append(String(dataModel.points.count))
-        setNeedsDisplay()
-    }
-    
-    func clear(clearOrigin: Bool) {
-        if clearOrigin {
-            dataModel.origin = nil
-        }
-        dataModel.points.removeAll()
-        dataModel.initialTime = nil
-        dataModel.times.removeAll()
-        dataModel.labels.removeAll()
-        interfaceState.selectedPositionPair = nil
-        interfaceState.selectedVelocityPair = nil
-        interfaceState.showingVelocities = false
-        setNeedsDisplay()
-    }
-    
     private func _addCircle(context: CGContext, atPoint point: CGPoint) {
         let circleRect = CGRectMake(point.x - pointRadius, point.y - pointRadius, 2 * pointRadius, 2 * pointRadius)
         CGContextBeginPath(context)
