@@ -12,7 +12,7 @@ import UIKit
 let accelerationFillColorFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.2, 0.3, 0.7, 0.9])
 let accelerationStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
 
-class AccelerationsView: PositionsView {
+class AccelerationsView: KinematiqueView {
     
     override func drawRect(rect: CGRect) {
     }

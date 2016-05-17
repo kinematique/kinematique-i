@@ -9,9 +9,9 @@
 import UIKit
 
 // Constants for drawing points
-let pointsFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])
+let pointsFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])!
 let pointRadius: CGFloat = 10
-let pointsStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
+let pointsStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])!
 let pointsStrokeWidth: CGFloat = 1
 
 // Constants for drawing vectors
@@ -27,20 +27,11 @@ let labelProximity: CGFloat = 24
 let labelTextColor = UIColor(white: 0.5, alpha: 1.0).CGColor
 let labelFont = UIFont.systemFontOfSize(24)
 
-class PositionsView: UIView {
+class PositionsView: KinematiqueView {
     
     let interfaceState = InterfaceState.sharedInstance
     
-    static var fullHeight: CGFloat = 1000 // a placeholder
-    
     let dataModel = DataModel.sharedInstance
-    
-    private func _addCircle(context: CGContext, atPoint point: CGPoint) {
-        let circleRect = CGRectMake(point.x - pointRadius, point.y - pointRadius, 2 * pointRadius, 2 * pointRadius)
-        CGContextBeginPath(context)
-        CGContextAddEllipseInRect(context, circleRect)
-        CGContextDrawPath(context, .FillStroke)
-    }
     
     private func _addCanonicalVector(context: CGContext, length: CGFloat) {
         let headLength: CGFloat = nominalHeadLength < length / 2 ? nominalHeadLength : length / 2
@@ -88,12 +79,10 @@ class PositionsView: UIView {
         
         guard let origin = dataModel.origin else { return }
         
-        // Add the points as filled gray circles with a thin stroke
-        CGContextSetFillColorWithColor(context, pointsFillColor)
-        CGContextSetStrokeColorWithColor(context, pointsStrokeColor)
-        CGContextSetLineWidth(context, pointsStrokeWidth)
+        // draw the points
+        setCircleAttributes(circleFillColor: pointsFillColor, circleStrokeColor: pointsStrokeColor, circleStrokeWidth: pointsStrokeWidth)
         for point in dataModel.points {
-            _addCircle(context, atPoint: point)
+            addCircle(atPoint: point, withRadius: pointRadius, alpha: 1.0)
         }
         
         // Add the vectors

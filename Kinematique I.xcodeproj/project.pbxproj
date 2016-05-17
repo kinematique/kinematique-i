@@ -11,6 +11,7 @@
 		D322D7651CEBC3FA00E852B8 /* AxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D322D7641CEBC3FA00E852B8 /* AxesView.swift */; };
 		D32AEAF11CE4342800847D70 /* VelocitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */; };
 		D32AEAF31CE4370100847D70 /* VelocitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AEAF21CE4370100847D70 /* VelocitiesView.swift */; };
+		D348ABB31CEBD94B0096E40F /* KinematiqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348ABB21CEBD94B0096E40F /* KinematiqueView.swift */; };
 		D35047901CEB9021006CDA3F /* AccerationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350478F1CEB9021006CDA3F /* AccerationsViewController.swift */; };
 		D35047921CEB903A006CDA3F /* AccelerationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35047911CEB903A006CDA3F /* AccelerationsView.swift */; };
 		D368FA3D1CDAE7720078A5A0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D368FA3C1CDAE7720078A5A0 /* Model.swift */; };
@@ -27,6 +28,7 @@
 		D322D7641CEBC3FA00E852B8 /* AxesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesView.swift; sourceTree = "<group>"; };
 		D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelocitiesViewController.swift; sourceTree = "<group>"; };
 		D32AEAF21CE4370100847D70 /* VelocitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelocitiesView.swift; sourceTree = "<group>"; };
+		D348ABB21CEBD94B0096E40F /* KinematiqueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinematiqueView.swift; sourceTree = "<group>"; };
 		D350478F1CEB9021006CDA3F /* AccerationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccerationsViewController.swift; sourceTree = "<group>"; };
 		D35047911CEB903A006CDA3F /* AccelerationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerationsView.swift; sourceTree = "<group>"; };
 		D368FA3C1CDAE7720078A5A0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -72,8 +74,9 @@
 			children = (
 				D396A8511CCAB02400DB48A2 /* AppDelegate.swift */,
 				D396A8531CCAB02400DB48A2 /* PositionsViewController.swift */,
-				D39169F01CDC07100068AA09 /* TracerView.swift */,
 				D322D7641CEBC3FA00E852B8 /* AxesView.swift */,
+				D348ABB21CEBD94B0096E40F /* KinematiqueView.swift */,
+				D39169F01CDC07100068AA09 /* TracerView.swift */,
 				D32202EA1CCAB9F80010B3A3 /* PositionsView.swift */,
 				D32AEAF01CE4342800847D70 /* VelocitiesViewController.swift */,
 				D32AEAF21CE4370100847D70 /* VelocitiesView.swift */,
@@ -165,6 +168,7 @@
 				D32AEAF11CE4342800847D70 /* VelocitiesViewController.swift in Sources */,
 				D32AEAF31CE4370100847D70 /* VelocitiesView.swift in Sources */,
 				D322D7651CEBC3FA00E852B8 /* AxesView.swift in Sources */,
+				D348ABB31CEBD94B0096E40F /* KinematiqueView.swift in Sources */,
 				D35047901CEB9021006CDA3F /* AccerationsViewController.swift in Sources */,
 				D35047921CEB903A006CDA3F /* AccelerationsView.swift in Sources */,
 				D396A8521CCAB02400DB48A2 /* AppDelegate.swift in Sources */,

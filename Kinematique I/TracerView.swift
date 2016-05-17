@@ -23,23 +23,16 @@ let doOverTime: CFTimeInterval = 10
 let initialAltitude: CGFloat = 40
 
 // Constants for drawing tracer points
-let tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])
-let tracerPointRadius: CGFloat = 10 // <== unused?!
-let tracerPointStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])
+let tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])!
+let tracerPointRadius: CGFloat = 10
+let tracerPointStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])!
 let tracerPointStrokeWidth: CGFloat = 1
 let shadowDuration: CFTimeInterval = 0.5
 let shadowQuantity: Int = 7
 
-class TracerView: UIView {
+class TracerView: KinematiqueView {
     
     let interfaceState = InterfaceState.sharedInstance
-        
-    private func _addCircle(context: CGContext, atPoint point: CGPoint) {
-        let circleRect = CGRectMake(point.x - pointRadius, point.y - pointRadius, 2 * pointRadius, 2 * pointRadius)
-        CGContextBeginPath(context)
-        CGContextAddEllipseInRect(context, circleRect)
-        CGContextDrawPath(context, .FillStroke)
-    }
     
     func circularMotion(timeInterval: CFTimeInterval) -> CGPoint? {
         let angle = CGFloat(2) * CGFloat(M_PI) * CGFloat(timeInterval) / CGFloat(period)
@@ -59,19 +52,15 @@ class TracerView: UIView {
     override func drawRect(rect: CGRect) {
         
         // Add the tracer point and its shadows
-        let context = UIGraphicsGetCurrentContext()!
-        CGContextSetFillColorWithColor(context, tracerPointFillColor)
-        CGContextSetStrokeColorWithColor(context, tracerPointStrokeColor)
-        CGContextSetLineWidth(context, pointsStrokeWidth)
+        setCircleAttributes(circleFillColor: tracerPointFillColor, circleStrokeColor: tracerPointStrokeColor, circleStrokeWidth: tracerPointStrokeWidth)
         for i in 0..<shadowQuantity {
             // Add the points as filled gray circles with a thin stroke
             let shadowFraction = CFTimeInterval(i) / CFTimeInterval(shadowQuantity)
             let shadowTime = shadowFraction * shadowDuration
             let shadowTimeInterval = interfaceState.tracerTimeInterval - shadowTime
             let point = interfaceState.showingParabolic ? parabolicMotion(shadowTimeInterval) : circularMotion(shadowTimeInterval)
-            CGContextSetAlpha(context, CGFloat(1 - shadowFraction))
             guard let knownPoint = point else { continue }
-            _addCircle(context, atPoint: knownPoint)
+            addCircle(atPoint: knownPoint, withRadius: tracerPointRadius, alpha: CGFloat(1 - shadowFraction))
         }
         
     }
