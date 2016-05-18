@@ -109,6 +109,7 @@ class PositionsViewController: UIViewController {
         if interfaceState.settingOrigin {
             dataModel.origin = tapPoint
             axesView.setNeedsDisplay()
+            positionsView.setNeedsDisplay()
             // once the origin has been set, the user can clear or add points
             clearButton.enabled = true
             addPointsButton.enabled = true

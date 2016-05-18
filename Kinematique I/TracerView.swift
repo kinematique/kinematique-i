@@ -23,10 +23,9 @@ let doOverTime: CFTimeInterval = 10
 let initialAltitude: CGFloat = 40
 
 // Constants for drawing tracer points
-let tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])!
-let tracerPointRadius: CGFloat = 10
-let tracerPointStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])!
-let tracerPointStrokeWidth: CGFloat = 1
+private let _tracerPointFillColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.5, 0.5, 0.5, 0.9])!
+private let _tracerPointStrokeColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [0.0, 0.0, 0.0, 1.0])!
+
 let shadowDuration: CFTimeInterval = 0.5
 let shadowQuantity: Int = 7
 
@@ -52,7 +51,7 @@ class TracerView: KinematiqueView {
     override func drawRect(rect: CGRect) {
         
         // Add the tracer point and its shadows
-        setCircleAttributes(circleFillColor: tracerPointFillColor, circleStrokeColor: tracerPointStrokeColor, circleStrokeWidth: tracerPointStrokeWidth)
+        setCircleAttributes(circleFillColor: _tracerPointFillColor, circleStrokeColor: _tracerPointStrokeColor)
         for i in 0..<shadowQuantity {
             // Add the points as filled gray circles with a thin stroke
             let shadowFraction = CFTimeInterval(i) / CFTimeInterval(shadowQuantity)
@@ -60,7 +59,7 @@ class TracerView: KinematiqueView {
             let shadowTimeInterval = interfaceState.tracerTimeInterval - shadowTime
             let point = interfaceState.showingParabolic ? parabolicMotion(shadowTimeInterval) : circularMotion(shadowTimeInterval)
             guard let knownPoint = point else { continue }
-            addCircle(atPoint: knownPoint, withRadius: tracerPointRadius, alpha: CGFloat(1 - shadowFraction))
+            addCircle(atPoint: knownPoint, alpha: CGFloat(1 - shadowFraction))
         }
         
     }
