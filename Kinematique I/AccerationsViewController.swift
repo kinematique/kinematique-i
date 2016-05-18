@@ -10,15 +10,17 @@ import UIKit
 
 class AccerationsViewController: UIViewController {
     
-    @IBOutlet weak var velocitiesView: VelocitiesView! = nil
-    @IBOutlet weak var accelerationsView: AccelerationsView! = nil
+    @IBOutlet weak var allPositionsView: PositionsView!
+    @IBOutlet weak var allVelocitiesView: VelocitiesView!
+    @IBOutlet weak var selectedVelocitiesView: VelocitiesView!
+    @IBOutlet weak var accelerationsView: AccelerationsView!
     
     @IBOutlet weak var earlierButton: UIBarButtonItem!
     @IBOutlet weak var laterButton: UIBarButtonItem!
     @IBOutlet weak var differencesButton: UIBarButtonItem!
     @IBOutlet weak var accelerationsButton: UIBarButtonItem!
     
-    let interfaceState = InterfaceState.sharedInstance
+    let userSelections = UserSelections.sharedInstance
     
     func canGoEarlier() -> Bool {
         return false
@@ -41,33 +43,35 @@ class AccerationsViewController: UIViewController {
     }
     
     @IBAction func differences(sender: UIBarButtonItem) {
-        interfaceState.showingAccelerations = false
+        userSelections.showingAccelerations = false
         differencesButton.style = .Done
         accelerationsButton.style = .Plain
-        velocitiesView.setNeedsDisplay()
+        accelerationsView.setNeedsDisplay()
     }
     
     @IBAction func accelerations(sender: UIBarButtonItem) {
-        interfaceState.showingAccelerations = true
+        userSelections.showingAccelerations = true
         differencesButton.style = .Plain
         accelerationsButton.style = .Done
-        // velocitiesView.setNeedsDisplay()
+        accelerationsView.setNeedsDisplay()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        velocitiesView.showingAllVelocities = true
+        if userSelections.selectedSecondOrderDifference == nil {
+            userSelections.selectedSecondOrderDifference = SecondOrderDifference(from: 0, middle: 1, to: 2)
+        }
+        allPositionsView.allPositionsShowing = true
+        allVelocitiesView.showingAllVelocities = true
+        selectedVelocitiesView.showingSecondOrderDifference = true
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if interfaceState.selectedVelocityPair == nil {
-            interfaceState.selectedVelocityPair = Difference(from:0, to:1)
-        }
         earlierButton.enabled = canGoEarlier()
         laterButton.enabled = canGoLater()
-        differencesButton.style = interfaceState.showingAccelerations ? .Plain : .Done
-        accelerationsButton.style = interfaceState.showingAccelerations ? .Done : .Plain
+        differencesButton.style = userSelections.showingAccelerations ? .Plain : .Done
+        accelerationsButton.style = userSelections.showingAccelerations ? .Done : .Plain
     }
 
     override func didReceiveMemoryWarning() {

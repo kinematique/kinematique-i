@@ -121,9 +121,11 @@
                             <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2O-Ju-5Ib" customClass="AxesView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </view>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
+                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdT-UN-hW9" userLabel="All Positions View" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEv-3z-rfq" userLabel="Selected Positions View" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMv-Oe-yWI" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
@@ -133,8 +135,11 @@
                         <constraints>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="3y6-k9-GNR"/>
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="4lP-xj-LbV"/>
+                            <constraint firstItem="VdT-UN-hW9" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="6Ki-Op-uEx"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="82a-qc-dFG"/>
+                            <constraint firstItem="VdT-UN-hW9" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="Aa2-BR-gNy"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="C1P-FM-7hj"/>
+                            <constraint firstItem="VdT-UN-hW9" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="Hks-j2-QM5"/>
                             <constraint firstItem="i2O-Ju-5Ib" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="IVK-Um-ae3"/>
                             <constraint firstItem="i2O-Ju-5Ib" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="VUF-3r-vRF"/>
                             <constraint firstItem="ZEv-3z-rfq" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="bct-Mx-nuv"/>
@@ -143,6 +148,7 @@
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="height" secondItem="jef-q5-N3C" secondAttribute="height" id="goA-vW-ICb"/>
                             <constraint firstItem="QMv-Oe-yWI" firstAttribute="centerX" secondItem="jef-q5-N3C" secondAttribute="centerX" id="hF0-UD-3Bg"/>
                             <constraint firstItem="i2O-Ju-5Ib" firstAttribute="centerY" secondItem="jef-q5-N3C" secondAttribute="centerY" id="qVp-k4-TAE"/>
+                            <constraint firstItem="VdT-UN-hW9" firstAttribute="width" secondItem="jef-q5-N3C" secondAttribute="width" id="zgj-iv-X75"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -177,9 +183,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="allPositionsView" destination="VdT-UN-hW9" id="PzD-Sw-KHY"/>
                         <outlet property="differencesButton" destination="dmq-99-tCu" id="r3H-Os-Fkf"/>
                         <outlet property="earlierButton" destination="P1T-1w-ntK" id="3oQ-iO-9WY"/>
                         <outlet property="laterButton" destination="t4Z-lc-aUz" id="saA-XM-cMx"/>
+                        <outlet property="selectedPositionsView" destination="ZEv-3z-rfq" id="E0A-A8-pVq"/>
                         <outlet property="velocitiesButton" destination="ThM-Z8-4by" id="4DN-F6-aqd"/>
                         <outlet property="velocitiesView" destination="QMv-Oe-yWI" id="D4K-vN-dqZ"/>
                     </connections>
@@ -204,11 +212,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xb8-3c-91m" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
+                            <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xb8-3c-91m" userLabel="All Positions View" customClass="PositionsView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-hx-qWA" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cB-42-62e" userLabel="Selected Velocities View" customClass="VelocitiesView" customModule="Kinematique_I" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkP-Zf-QNi" customClass="AccelerationsView" customModule="Kinematique_I" customModuleProvider="target">
@@ -218,6 +228,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="1GT-Xj-oPl"/>
+                            <constraint firstItem="8cB-42-62e" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="33n-AL-VL1"/>
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="3xd-BO-t9g"/>
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="4un-Lu-ZJc"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="F7S-1w-IMQ"/>
@@ -228,7 +239,10 @@
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="PSE-fD-e5c"/>
                             <constraint firstItem="Xb8-3c-91m" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="TZw-CK-eG3"/>
                             <constraint firstItem="DkP-Zf-QNi" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="WU1-jD-fqf"/>
+                            <constraint firstItem="8cB-42-62e" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="Zik-yF-a92"/>
+                            <constraint firstItem="8cB-42-62e" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="bdD-Op-krK"/>
                             <constraint firstItem="5Sy-hx-qWA" firstAttribute="centerX" secondItem="nmR-XY-krB" secondAttribute="centerX" id="gfb-eA-kRs"/>
+                            <constraint firstItem="8cB-42-62e" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="glb-Qi-IYW"/>
                             <constraint firstItem="Xb8-3c-91m" firstAttribute="width" secondItem="nmR-XY-krB" secondAttribute="width" id="gnD-jY-9dx"/>
                             <constraint firstItem="MyR-Td-eH1" firstAttribute="centerY" secondItem="nmR-XY-krB" secondAttribute="centerY" id="gzT-Ld-SLH"/>
                             <constraint firstItem="Xb8-3c-91m" firstAttribute="height" secondItem="nmR-XY-krB" secondAttribute="height" id="iAD-dJ-37I"/>
@@ -253,16 +267,22 @@
                                 <action selector="differences:" destination="XoF-Jg-Nmw" id="qTo-14-Djm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Accelerations" id="HHm-cG-2sL"/>
+                        <barButtonItem title="Accelerations" id="HHm-cG-2sL">
+                            <connections>
+                                <action selector="accelerations:" destination="XoF-Jg-Nmw" id="6JM-5v-5NB"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Accelerations" id="HKc-XG-nOj"/>
                     <connections>
                         <outlet property="accelerationsButton" destination="HHm-cG-2sL" id="Dug-Sl-TAV"/>
                         <outlet property="accelerationsView" destination="DkP-Zf-QNi" id="GzO-Sr-Ko4"/>
+                        <outlet property="allPositionsView" destination="Xb8-3c-91m" id="sWQ-fW-48a"/>
+                        <outlet property="allVelocitiesView" destination="5Sy-hx-qWA" id="s4V-k4-eKE"/>
                         <outlet property="differencesButton" destination="Tht-Cj-GcY" id="uZs-fr-xn1"/>
                         <outlet property="earlierButton" destination="2lm-aB-mnF" id="yKl-Lm-nyC"/>
                         <outlet property="laterButton" destination="rkU-Ga-WzK" id="OIQ-X5-Me4"/>
-                        <outlet property="velocitiesView" destination="5Sy-hx-qWA" id="wLj-wQ-aGk"/>
+                        <outlet property="selectedVelocitiesView" destination="8cB-42-62e" id="fds-V0-Bcz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mNF-mT-0dr" userLabel="First Responder" sceneMemberID="firstResponder"/>

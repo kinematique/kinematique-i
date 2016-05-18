@@ -8,6 +8,12 @@
 
 import CoreGraphics
 
+// In principle, the difference between any two vectors can be shown.
+// In actuality, `to` is always `from + 1`.
+typealias Difference = (from: Int, to: Int)
+
+// In actuality, `to` is always `middle + 1` and `middle` is always `from + 1`.
+typealias SecondOrderDifference = (from: Int, middle: Int, to: Int)
 
 class DataModel {
     
@@ -19,11 +25,16 @@ class DataModel {
     
     var points: [CGPoint] = []
     
+    // Sanitized points can be nil! They are in 1:1 correspondence with points. Sometimes the
+    // function in the tracer view legitimately returns nil.
+    var sanitizedPoints: [CGPoint?] = []
+    
     var times: [CFTimeInterval] = []
     
     var labels: [String] = []
     
     var allDifferences: [Difference] {
+        guard points.count > 1 else { return [] }
         var differences: [Difference] = []
         for i in 0..<points.count - 1 {
             differences.append(Difference(from:i, to:i + 1))
@@ -31,21 +42,26 @@ class DataModel {
         return differences
     }
     
+    var allSecondOrderDifferences: [SecondOrderDifference] {
+        guard points.count > 2 else { return [] }
+        var secondOrderDifferences: [SecondOrderDifference] = []
+        for i in 0..<points.count - 2 {
+            secondOrderDifferences.append(SecondOrderDifference(from:i, middle:i + 1, to:i + 2))
+        }
+        return secondOrderDifferences
+    }
+    
 }
 
-// In principle, the difference between any to vectors can be shown.
-// In actuality, `to` is always `from + 1`.
-typealias Difference = (from: Int, to: Int)
-
-class InterfaceState {
+class UserSelections {
     
-    static let sharedInstance = InterfaceState()
+    static let sharedInstance = UserSelections()
     
     var settingOrigin: Bool = true
     
-    var selectedPositionPair: Difference? = nil
+    var selectedDifference: Difference? = nil
     
-    var selectedVelocityPair: Difference? = nil
+    var selectedSecondOrderDifference: SecondOrderDifference? = nil
 
     var tracerResetTime: CFAbsoluteTime! = nil
     
@@ -57,20 +73,15 @@ class InterfaceState {
     
     var showingAccelerations: Bool = false
     
-    var selectedPositionPairs: [Difference] {
-        if let difference = selectedPositionPair {
-            return [difference]
-        } else {
-            return []
-        }
+    var selectedDifferences: [Difference] {
+        guard let difference = selectedDifference else { return [] }
+        return [difference]
     }
     
-    var selectedVelocityPairs: [Difference] {
-        if let difference = selectedVelocityPair {
-            return [difference]
-        } else {
-            return []
-        }
+    var selectedSecondOrderDifferences: [SecondOrderDifference] {
+        guard let secondOrderDifference = selectedSecondOrderDifference else { return [] }
+        return [secondOrderDifference]
     }
     
 }
+

@@ -10,33 +10,33 @@ import UIKit
 
 class PositionsViewController: UIViewController {
     
-    @IBOutlet var tracerView: TracerView!
-    @IBOutlet var axesView: AxesView!
-    @IBOutlet var positionsView: PositionsView!
+    @IBOutlet weak var tracerView: TracerView!
+    @IBOutlet weak var axesView: AxesView!
+    @IBOutlet weak var positionsView: PositionsView!
     
-    @IBOutlet var setOriginButton: UIBarButtonItem!
-    @IBOutlet var addPointsButton: UIBarButtonItem!
-    @IBOutlet var clearButton: UIBarButtonItem!
-    @IBOutlet var nextButton: UIBarButtonItem!
-    @IBOutlet var circularButton: UIBarButtonItem!
-    @IBOutlet var parabolicButton: UIBarButtonItem!
+    @IBOutlet weak var setOriginButton: UIBarButtonItem!
+    @IBOutlet weak var addPointsButton: UIBarButtonItem!
+    @IBOutlet weak var clearButton: UIBarButtonItem!
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet weak var circularButton: UIBarButtonItem!
+    @IBOutlet weak var parabolicButton: UIBarButtonItem!
     
     var displayLink: CADisplayLink! = nil
         
-    let interfaceState = InterfaceState.sharedInstance
+    let userSelections = UserSelections.sharedInstance
     let dataModel = DataModel.sharedInstance
     
     private func _settingOrigin() {
-        if !interfaceState.settingOrigin {
-            interfaceState.settingOrigin = true
+        if !userSelections.settingOrigin {
+            userSelections.settingOrigin = true
             setOriginButton.style = .Done
             addPointsButton.style = .Plain
         }
     }
     
     private func _addingPoints() {
-        if interfaceState.settingOrigin {
-            interfaceState.settingOrigin = false
+        if userSelections.settingOrigin {
+            userSelections.settingOrigin = false
             setOriginButton.style = .Plain
             addPointsButton.style = .Done
         }
@@ -48,35 +48,36 @@ class PositionsViewController: UIViewController {
             clearButton.enabled = false
             addPointsButton.enabled = false
             dataModel.origin = nil
+            axesView.setNeedsDisplay()
         }
         dataModel.points.removeAll()
         dataModel.initialTime = nil
         dataModel.times.removeAll()
         dataModel.labels.removeAll()
-        interfaceState.selectedPositionPair = nil
-        interfaceState.selectedVelocityPair = nil
-        interfaceState.showingVelocities = false
-        interfaceState.showingAccelerations = false
+        userSelections.selectedDifference = nil
+        userSelections.selectedSecondOrderDifference = nil
+        userSelections.showingVelocities = false
+        userSelections.showingAccelerations = false
         positionsView.setNeedsDisplay()
         nextButton.enabled = false
     }
     
     @IBAction func circular(sender: UIBarButtonItem) {
-        interfaceState.showingParabolic = false
+        userSelections.showingParabolic = false
         circularButton.style = .Done
         parabolicButton.style = .Plain
-        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
-        interfaceState.tracerTimeInterval = 0
+        userSelections.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        userSelections.tracerTimeInterval = 0
         // clear invoked this way does not clear the origin
         _clear(false)
     }
     
     @IBAction func parabolic(sender: UIBarButtonItem) {
-        interfaceState.showingParabolic = true
+        userSelections.showingParabolic = true
         circularButton.style = .Plain
         parabolicButton.style = .Done
-        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
-        interfaceState.tracerTimeInterval = 0
+        userSelections.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        userSelections.tracerTimeInterval = 0
         // clear invoked this way does not clear the origin
         _clear(false)
     }
@@ -101,12 +102,15 @@ class PositionsViewController: UIViewController {
         }
         dataModel.points.append(point)
         dataModel.times.append(now - dataModel.initialTime)
+        let sanitizedPoint = userSelections.showingParabolic ? tracerView.parabolicMotion(now) : tracerView.circularMotion(now)
+        dataModel.sanitizedPoints.append(sanitizedPoint)
+
         dataModel.labels.append(String(dataModel.points.count))
     }
     
     @IBAction func viewTapped(sender: UITapGestureRecognizer) {
         let tapPoint: CGPoint = sender.locationOfTouch(0, inView: positionsView)
-        if interfaceState.settingOrigin {
+        if userSelections.settingOrigin {
             dataModel.origin = tapPoint
             axesView.setNeedsDisplay()
             positionsView.setNeedsDisplay()
@@ -116,8 +120,8 @@ class PositionsViewController: UIViewController {
         } else {
             addPoint(tapPoint)
             positionsView.setNeedsDisplay()
-            // Once the user has added two points, they can hit next
-            if dataModel.points.count == 2 {
+            // Once the user has made three points, they can hit next
+            if dataModel.points.count == 3 {
                 nextButton.enabled = true
             }
         }
@@ -128,16 +132,17 @@ class PositionsViewController: UIViewController {
         displayLink = CADisplayLink(target:self, selector:#selector(prepareForVSync(_:)))
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode:NSRunLoopCommonModes)
         displayLink.paused = true
+        positionsView.allPositionsShowing = true
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        interfaceState.tracerResetTime = CFAbsoluteTimeGetCurrent()
-        interfaceState.tracerTimeInterval = 0
+        userSelections.tracerResetTime = CFAbsoluteTimeGetCurrent()
+        userSelections.tracerTimeInterval = 0
         tracerView.setNeedsDisplay()
         displayLink.paused = false
-        circularButton.style = interfaceState.showingParabolic ? .Plain : .Done
-        parabolicButton.style = interfaceState.showingParabolic ? .Done : .Plain
+        circularButton.style = userSelections.showingParabolic ? .Plain : .Done
+        parabolicButton.style = userSelections.showingParabolic ? .Done : .Plain
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -146,7 +151,7 @@ class PositionsViewController: UIViewController {
     }
     
     func prepareForVSync(displayLink: CADisplayLink) {
-        interfaceState.tracerTimeInterval = CFAbsoluteTimeGetCurrent() + displayLink.duration - interfaceState.tracerResetTime
+        userSelections.tracerTimeInterval = CFAbsoluteTimeGetCurrent() + displayLink.duration - userSelections.tracerResetTime
         tracerView.setNeedsDisplay()
     }
     

@@ -31,7 +31,7 @@ let shadowQuantity: Int = 7
 
 class TracerView: KinematiqueView {
     
-    let interfaceState = InterfaceState.sharedInstance
+    let userSelections = UserSelections.sharedInstance
     
     func circularMotion(timeInterval: CFTimeInterval) -> CGPoint? {
         let angle = CGFloat(2) * CGFloat(M_PI) * CGFloat(timeInterval) / CGFloat(period)
@@ -56,8 +56,8 @@ class TracerView: KinematiqueView {
             // Add the points as filled gray circles with a thin stroke
             let shadowFraction = CFTimeInterval(i) / CFTimeInterval(shadowQuantity)
             let shadowTime = shadowFraction * shadowDuration
-            let shadowTimeInterval = interfaceState.tracerTimeInterval - shadowTime
-            let point = interfaceState.showingParabolic ? parabolicMotion(shadowTimeInterval) : circularMotion(shadowTimeInterval)
+            let shadowTimeInterval = userSelections.tracerTimeInterval - shadowTime
+            let point = userSelections.showingParabolic ? parabolicMotion(shadowTimeInterval) : circularMotion(shadowTimeInterval)
             guard let knownPoint = point else { continue }
             addCircle(atPoint: knownPoint, alpha: CGFloat(1 - shadowFraction))
         }
